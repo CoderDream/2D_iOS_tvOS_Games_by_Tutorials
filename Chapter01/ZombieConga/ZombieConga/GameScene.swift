@@ -18,7 +18,7 @@ class GameScene: SKScene {
     // 时间增量
     var dt : TimeInterval = 0
     // 偏移向量
-    let zombieMovePointsPerSec : CGFloat = 4800.0
+    let zombieMovePointsPerSec : CGFloat = 480.0
     // 移动速度，初始速度为0
     var velocity  = CGPoint.zero
     // 游戏区域
@@ -79,6 +79,9 @@ class GameScene: SKScene {
         }
         lastUpdateTime = currentTime
         print("\(dt * 1000) milliseconds since last update")
+        
+        // 旋转僵尸
+        rotateSprite(sprite: zombie, direction: velocity)
     }
     
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
@@ -144,16 +147,22 @@ class GameScene: SKScene {
         }
     }
     
+    // 画矩形
     func debugDrawPlayableArea() {
         let shape = SKShapeNode()
         let path = CGMutablePath.init()
         // var transform = CGAffineTransform.init(translationX:0, y: -20)
-        // Nil is not compatible with expected argument type 'UnsafePointer<CGAffineTransform>'
-        // CGPathAddRect(path, transform, playableRect)
+        // TODO: Nil is not compatible with expected argument type 'UnsafePointer<CGAffineTransform>'
+        // CGPathAddRect(path, nil, playableRect)
         shape.path = path
         shape.strokeColor = SKColor.red
         shape.lineWidth = 4.0
         addChild(shape)
+    }
+    
+    // 旋转僵尸
+    func rotateSprite(sprite: SKSpriteNode, direction : CGPoint) {
+        sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
     }
     
 //    private var label : SKLabelNode?
