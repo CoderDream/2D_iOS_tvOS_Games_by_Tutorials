@@ -21,7 +21,7 @@ class GameViewController: UIViewController {
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .aspectFill
-        skView.presentScene(scene)
+        skView.presentScene(scene)   
         
         
 //        if let view = self.view as! SKView? {

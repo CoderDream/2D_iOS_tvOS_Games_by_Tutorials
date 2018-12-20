@@ -13,6 +13,24 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.black
+        // 创建精灵
+        let background = SKSpriteNode(imageNamed: "background3")
+        // 把精灵加到场景
+        addChild(background)
+        // 定位精灵
+        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        // 设置精灵的锚点
+        //background.anchorPoint = CGPoint.zero
+        //background.position = CGPoint.zero
+        
+        background.anchorPoint =  CGPoint(x: 0.5, y: 0.5) // default
+        // 旋转精灵
+        // background.zRotation = CGFloat(Double.pi) / 8
+        // 获取精灵的大小
+        let mySize = background.size
+        print("Size: \(mySize)")
+        // 节点和z位置
+        background.zPosition = -1
     }
     
 //    private var label : SKLabelNode?
