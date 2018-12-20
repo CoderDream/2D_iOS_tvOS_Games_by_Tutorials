@@ -31,6 +31,16 @@ class GameScene: SKScene {
         print("Size: \(mySize)")
         // 节点和z位置
         background.zPosition = -1
+        
+        
+        // 创建精灵
+        let zombie = SKSpriteNode(imageNamed: "zombie1")
+        zombie.size = CGSize(width: 314, height: 204)
+        // 把精灵加到场景
+        addChild(zombie)
+        // 定位精灵
+        zombie.position = CGPoint(x: 400, y: 400)
+        
     }
     
 //    private var label : SKLabelNode?
