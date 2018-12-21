@@ -79,7 +79,7 @@ class GameScene: SKScene {
         // 把精灵加到场景
         addChild(zombie)
         // 3.9 动画动作
-        zombie.run(SKAction.repeatForever(zombieAnimation))
+        // zombie.run(SKAction.repeatForever(zombieAnimation))
         // 生成敌人
         // spawnEnemy()
         // 3.7 定期生成
@@ -111,6 +111,8 @@ class GameScene: SKScene {
             if diff.length() <= zombieMovePointsPerSec * CGFloat(dt) {
                 zombie.position = lastTouchLocation
                 velocity = CGPoint.zero
+                // 3.10 停止动作
+                stopZombieAnimation()                
             } else {
                 // 移动精灵
                 moveSprite(sprite: zombie, velocity: velocity)
@@ -125,6 +127,7 @@ class GameScene: SKScene {
         boundsCheckZombie()
     }
     
+    // 移动精灵
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
         // 1
         let amountToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
@@ -138,7 +141,10 @@ class GameScene: SKScene {
         }
     }
     
+    // 僵尸向前运动
     func moveZombieToward(location: CGPoint) {
+        // 3.10 开始动作
+        startZombieAnimation()
         // 获得偏移向量
         //let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
         let offset = location - zombie.position
@@ -153,7 +159,7 @@ class GameScene: SKScene {
         velocity = direction * zombieMovePointsPerSec
     }
     
-    // 连续触摸事件
+    // 触摸事件
     func sceneTouched(touchLocaction:CGPoint) {
         // 点击时设置lastTouchLocation
         lastTouchLocation = touchLocaction
@@ -280,6 +286,18 @@ class GameScene: SKScene {
         // 3.8 从父节点删除动作
         let actionRemove = SKAction.removeFromParent()
         enemy.run(SKAction.sequence([actionMove, actionRemove]))
+    }
+    
+    // 开始僵尸动画
+    func startZombieAnimation() {
+        if zombie.action(forKey: "animation") == nil {
+            zombie.run(SKAction.repeatForever(zombieAnimation), withKey: "animation")
+        }
+    }
+    
+    // 停止僵尸动画
+    func stopZombieAnimation() {
+        zombie.removeAction(forKey: "animation")
     }
     
 //    private var label : SKLabelNode?
