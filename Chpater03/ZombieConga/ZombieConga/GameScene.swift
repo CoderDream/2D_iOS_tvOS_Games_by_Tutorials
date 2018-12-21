@@ -316,10 +316,20 @@ class GameScene: SKScene {
         // 2 创建一个动作，调用scale(to:duration)来把小猫放大到正常大小，这个动作不是反向的，所以再创建一个类似的动作，将小猫缩放级别变回到0
         // 在动作序列中，小猫先出现，等待一会儿，消失，然后将其从父节点中删除
         let appear = SKAction.scale(to: 1.0, duration: 0.5)
-        let wait = SKAction.wait(forDuration: 10.0)
+        // let wait = SKAction.wait(forDuration: 10.0)
+        // 3.12 旋转操作
+        // 初始位置先逆时针旋转11.25°
+        cat.zRotation = -π / 16.0
+        // 0.5秒逆时针旋转22.5°
+        let leftWiggle = SKAction.rotate(byAngle: π / 8.0, duration: 0.5)
+        // 0.5秒顺时针旋转22.5°，这个完整的摇摆一共用了1秒钟时间
+        let rightWiggle = leftWiggle.reversed()
+        let fullWiggle = SKAction.sequence([leftWiggle, rightWiggle])
+        let wiggleWait = SKAction.repeat(fullWiggle, count: 10)
         let disappear = SKAction.scale(to: 0, duration: 0.5)
         let removeFromParent = SKAction.removeFromParent()
-        let actions = [appear, wait, disappear, removeFromParent]
+        // let actions = [appear, wait, disappear, removeFromParent]
+        let actions = [appear, wiggleWait, disappear, removeFromParent]
         cat.run(SKAction.sequence(actions))
     }
     
