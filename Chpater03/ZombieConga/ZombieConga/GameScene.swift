@@ -65,6 +65,8 @@ class GameScene: SKScene {
         // zombie.size = CGSize(width: 314, height: 204)
         // 把精灵加到场景
         addChild(zombie)
+        // 生成敌人
+        spawnEnemy()
         // 定位精灵
         zombie.position = CGPoint(x: 400, y: 400)
     }
@@ -217,6 +219,18 @@ class GameScene: SKScene {
         sprite.zRotation += shortest.sign() * amountToRotate
     }
     
+    // 生成敌人
+    func spawnEnemy() {
+        let enemy = SKSpriteNode(imageNamed: "enemy")
+        // 将其垂直居中地放在屏幕上，刚好在视图之外的右边
+        enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
+        addChild(enemy)
+        
+        // 沿着 x 轴向左移动，2秒钟之内移到刚好在屏幕的左边之外
+        let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 2.0)
+        enemy.run(actionMove)
+    }
+    
 //    private var label : SKLabelNode?
 //    private var spinnyNode : SKShapeNode?
 //
@@ -294,5 +308,6 @@ class GameScene: SKScene {
 //        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
 //    }
 //
+    
 
 }
