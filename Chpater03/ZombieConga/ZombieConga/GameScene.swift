@@ -66,7 +66,9 @@ class GameScene: SKScene {
         // 把精灵加到场景
         addChild(zombie)
         // 生成敌人
-        spawnEnemy()
+        // spawnEnemy()
+        // 3.7 定期生成
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnEnemy), SKAction.wait(forDuration: 2.0)])))
         // 定位精灵
         zombie.position = CGPoint(x: 400, y: 400)
     }
@@ -223,7 +225,9 @@ class GameScene: SKScene {
     func spawnEnemy() {
         let enemy = SKSpriteNode(imageNamed: "enemy")
         // 将其垂直居中地放在屏幕上，刚好在视图之外的右边
-        enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
+        //enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
+        // 3.7 定期生成
+        enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: CGFloat.random(min: playableRect.minY + enemy.size.height / 2, max: playableRect.maxY - enemy.size.height / 2))
         addChild(enemy)
         
         // 沿着 x 轴向左移动，2秒钟之内移到刚好在屏幕的左边之外
@@ -233,29 +237,31 @@ class GameScene: SKScene {
         // 3.2 连续动作
         // 1 先移动到中间底部
         // let actionMidMove =  SKAction.move(to: CGPoint(x: size.width / 2, y: playableRect.minY + enemy.size.height / 2), duration: 1.0)
-        let actionMidMove = SKAction.moveBy(x: -size.width / 2 - enemy.size.width / 2, y: -playableRect.height / 2 + enemy.size.height / 2, duration: 1.0)
-        // 2 再移动到最左边
-        //let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 1.0)
-        let actionMove = SKAction.moveBy(x: -size.width / 2 - enemy.size.width / 2, y: playableRect.height / 2 - enemy.size.height / 2, duration: 1.0)
-        // 等待动作
-        let wait = SKAction.wait(forDuration: 0.25)
-        // 3.4 运行代码块动作
-        let logMessage = SKAction.run {
-            print("Reached bottom!")
-        }
+//        let actionMidMove = SKAction.moveBy(x: -size.width / 2 - enemy.size.width / 2, y: -playableRect.height / 2 + enemy.size.height / 2, duration: 1.0)
+//        // 2 再移动到最左边
+//        //let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 1.0)
+//        let actionMove = SKAction.moveBy(x: -size.width / 2 - enemy.size.width / 2, y: playableRect.height / 2 - enemy.size.height / 2, duration: 1.0)
+//        // 等待动作
+//        let wait = SKAction.wait(forDuration: 0.25)
+//        // 3.4 运行代码块动作
+//        let logMessage = SKAction.run {
+//            print("Reached bottom!")
+//        }
 //        // actionMidMove 的反向动作
 //        let reverseMid = actionMidMove.reversed()
 //        // reverseMove 的方向动作
 //        let reverseMove = actionMove.reversed()
 //        // 3 构造动作序列
 //        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
-        let halfSquence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
-        let sequence = SKAction.sequence([halfSquence, halfSquence.reversed()])
-        // 4 连续动作
-        // enemy.run(sequence)
-        // 3.6 重复动作
-        let repeatAction = SKAction.repeatForever(sequence)
-        enemy.run(repeatAction)
+//        let halfSquence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+//        let sequence = SKAction.sequence([halfSquence, halfSquence.reversed()])
+//        // 4 连续动作
+//        // enemy.run(sequence)
+//        // 3.6 重复动作
+//        let repeatAction = SKAction.repeatForever(sequence)
+//        enemy.run(repeatAction)
+        let actionMove = SKAction.moveTo(x: -enemy.size.width / 2, duration: 2.0)
+        enemy.run(actionMove)
     }
     
 //    private var label : SKLabelNode?

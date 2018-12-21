@@ -107,5 +107,16 @@ extension CGFloat {
     func sign() -> CGFloat {
         return (self >= 0.0) ? 1.0 : -1.0
     }
+    
+    // 生成0到1之间的随机数
+    static func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UInt32.max))
+    }
+    
+    // 给出指定的最小值和最大值之间的一个随机数
+    static func random(min : CGFloat, max : CGFloat) -> CGFloat {
+        assert(min < max)
+        return CGFloat.random() * (max - min) + min
+    }
 }
 
