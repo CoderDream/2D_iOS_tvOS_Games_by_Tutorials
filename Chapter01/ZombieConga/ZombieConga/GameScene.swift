@@ -23,6 +23,8 @@ class GameScene: SKScene {
     var velocity  = CGPoint.zero
     // 游戏区域
     let playableRect : CGRect
+    // 最后触摸位置
+    var lastTouchLocation :CGPoint?
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -70,18 +72,37 @@ class GameScene: SKScene {
         // Called before each frame is rendered
         // zombie.position = CGPoint(x: zombie.position.x + 8, y: zombie.position.y)
         // moveSprite(sprite: zombie, velocity: CGPoint(x: zombieMovePointsPerSec, y: 0))
-        moveSprite(sprite: zombie, velocity: velocity)
-        boundsCheckZombie()
+        // moveSprite(sprite: zombie, velocity: velocity)
         if lastUpdateTime > 0 {
             dt = currentTime - lastUpdateTime
         } else {
             dt = 0
         }
         lastUpdateTime = currentTime
-        // print("\(dt * 1000) milliseconds since last update")
+        print("\(dt * 1000) milliseconds since last update")
+        
+        if let lastTouchLocation = lastTouchLocation {
+            
+            print("lastTouchLocation \(lastTouchLocation) ")
+            let diff = lastTouchLocation - zombie.position
+            
+            print("diff  \(diff) ")
+            // 如果这个距离小于或等于僵尸将要在当前帧中移动的距离，那么就把僵尸的位置设置为最近一次触摸的位置，并将其速度设置为0
+            if diff.length() <= zombieMovePointsPerSec * CGFloat(dt) {
+                zombie.position = lastTouchLocation
+                velocity = CGPoint.zero
+            } else {
+                // 移动精灵
+                moveSprite(sprite: zombie, velocity: velocity)
+                // 旋转僵尸
+                rotateSprite(sprite: zombie, direction: velocity)
+            }
+        }
         
         // 旋转僵尸
-        rotateSprite(sprite: zombie, direction: velocity)
+       // rotateSprite(sprite: zombie, direction: velocity)
+        // 检查边界
+        boundsCheckZombie()
     }
     
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
@@ -114,6 +135,8 @@ class GameScene: SKScene {
     
     // 连续触摸事件
     func sceneTouched(touchLocaction:CGPoint) {
+        // 点击时设置lastTouchLocation
+        lastTouchLocation = touchLocaction
         moveZombieToward(location: touchLocaction)
     }
     
