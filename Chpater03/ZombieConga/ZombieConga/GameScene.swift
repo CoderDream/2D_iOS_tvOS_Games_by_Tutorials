@@ -262,6 +262,9 @@ class GameScene: SKScene {
 //        enemy.run(repeatAction)
         let actionMove = SKAction.moveTo(x: -enemy.size.width / 2, duration: 2.0)
         enemy.run(actionMove)
+        // 3.8 从父节点删除动作
+        let actionRemove = SKAction.removeFromParent()
+        enemy.run(SKAction.sequence([actionMove, actionRemove]))
     }
     
 //    private var label : SKLabelNode?
