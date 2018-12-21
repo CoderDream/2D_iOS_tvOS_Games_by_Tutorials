@@ -82,14 +82,14 @@ class GameScene: SKScene {
             dt = 0
         }
         lastUpdateTime = currentTime
-        print("\(dt * 1000) milliseconds since last update")
+        // print("\(dt * 1000) milliseconds since last update")
         
         if let lastTouchLocation = lastTouchLocation {
             
-            print("lastTouchLocation \(lastTouchLocation) ")
+            // print("lastTouchLocation \(lastTouchLocation) ")
             let diff = lastTouchLocation - zombie.position
             
-            print("diff  \(diff) ")
+            // print("diff  \(diff) ")
             // 如果这个距离小于或等于僵尸将要在当前帧中移动的距离，那么就把僵尸的位置设置为最近一次触摸的位置，并将其速度设置为0
             if diff.length() <= zombieMovePointsPerSec * CGFloat(dt) {
                 zombie.position = lastTouchLocation
@@ -232,17 +232,25 @@ class GameScene: SKScene {
         
         // 3.2 连续动作
         // 1 先移动到中间底部
-        let actionMidMove =  SKAction.move(to: CGPoint(x: size.width / 2, y: playableRect.minY + enemy.size.height / 2), duration: 1.0)
+        // let actionMidMove =  SKAction.move(to: CGPoint(x: size.width / 2, y: playableRect.minY + enemy.size.height / 2), duration: 1.0)
+        let actionMidMove = SKAction.moveBy(x: -size.width / 2 - enemy.size.width / 2, y: -playableRect.height / 2 + enemy.size.height / 2, duration: 1.0)
         // 2 再移动到最左边
-        let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 1.0)
+        //let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 1.0)
+        let actionMove = SKAction.moveBy(x: -size.width / 2 - enemy.size.width / 2, y: playableRect.height / 2 - enemy.size.height / 2, duration: 1.0)
         // 等待动作
         let wait = SKAction.wait(forDuration: 0.25)
         // 3.4 运行代码块动作
         let logMessage = SKAction.run {
             print("Reached bottom!")
         }
-        // 3 构造动作序列
-        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+//        // actionMidMove 的反向动作
+//        let reverseMid = actionMidMove.reversed()
+//        // reverseMove 的方向动作
+//        let reverseMove = actionMove.reversed()
+//        // 3 构造动作序列
+//        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
+        let halfSquence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+        let sequence = SKAction.sequence([halfSquence, halfSquence.reversed()])
         // 4 连续动作
         enemy.run(sequence)
     }
