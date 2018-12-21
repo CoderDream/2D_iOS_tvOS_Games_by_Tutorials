@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F12DE5C21CD2ED80078D25C /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F12DE5721CD2ED80078D25C /* backgroundMusic.mp3 */; };
+		3F12DE5D21CD2ED80078D25C /* hitCat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F12DE5821CD2ED80078D25C /* hitCat.wav */; };
+		3F12DE5E21CD2ED80078D25C /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F12DE5921CD2ED80078D25C /* hitCatLady.wav */; };
+		3F12DE5F21CD2ED80078D25C /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F12DE5A21CD2ED80078D25C /* lose.wav */; };
+		3F12DE6021CD2ED80078D25C /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F12DE5B21CD2ED80078D25C /* win.wav */; };
 		3F40498621C7F17100ABDA6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40498521C7F17100ABDA6C /* AppDelegate.swift */; };
 		3F40498C21C7F17100ABDA6C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40498B21C7F17100ABDA6C /* GameScene.swift */; };
 		3F40498E21C7F17100ABDA6C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40498D21C7F17100ABDA6C /* GameViewController.swift */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F12DE5721CD2ED80078D25C /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		3F12DE5821CD2ED80078D25C /* hitCat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCat.wav; sourceTree = "<group>"; };
+		3F12DE5921CD2ED80078D25C /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCatLady.wav; sourceTree = "<group>"; };
+		3F12DE5A21CD2ED80078D25C /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
+		3F12DE5B21CD2ED80078D25C /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		3F40498221C7F17100ABDA6C /* ZombieConga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieConga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F40498521C7F17100ABDA6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F40498B21C7F17100ABDA6C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -39,6 +49,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F12DE5621CD2ED80078D25C /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3F12DE5721CD2ED80078D25C /* backgroundMusic.mp3 */,
+				3F12DE5821CD2ED80078D25C /* hitCat.wav */,
+				3F12DE5921CD2ED80078D25C /* hitCatLady.wav */,
+				3F12DE5A21CD2ED80078D25C /* lose.wav */,
+				3F12DE5B21CD2ED80078D25C /* win.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		3F40497921C7F17100ABDA6C = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +80,7 @@
 		3F40498421C7F17100ABDA6C /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				3F12DE5621CD2ED80078D25C /* Sounds */,
 				3F40498521C7F17100ABDA6C /* AppDelegate.swift */,
 				3F40498B21C7F17100ABDA6C /* GameScene.swift */,
 				3F40498D21C7F17100ABDA6C /* GameViewController.swift */,
@@ -129,7 +152,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F40499121C7F17100ABDA6C /* Main.storyboard in Resources */,
+				3F12DE6021CD2ED80078D25C /* win.wav in Resources */,
+				3F12DE5D21CD2ED80078D25C /* hitCat.wav in Resources */,
 				3F40499321C7F17600ABDA6C /* Assets.xcassets in Resources */,
+				3F12DE5F21CD2ED80078D25C /* lose.wav in Resources */,
+				3F12DE5E21CD2ED80078D25C /* hitCatLady.wav in Resources */,
+				3F12DE5C21CD2ED80078D25C /* backgroundMusic.mp3 in Resources */,
 				3F40499621C7F17600ABDA6C /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
