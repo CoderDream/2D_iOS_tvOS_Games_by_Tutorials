@@ -78,7 +78,7 @@ class GameScene: SKScene {
             dt = 0
         }
         lastUpdateTime = currentTime
-        print("\(dt * 1000) milliseconds since last update")
+        // print("\(dt * 1000) milliseconds since last update")
         
         // 旋转僵尸
         rotateSprite(sprite: zombie, direction: velocity)
@@ -87,19 +87,29 @@ class GameScene: SKScene {
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
         // 1
         let amountToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
-        print("Amount to move: \(amountToMove)")
+        // print("Amount to move: \(amountToMove)")
         // 2
-        sprite.position = CGPoint(x: sprite.position.x + amountToMove.x, y: sprite.position.y + amountToMove.y)
+        // sprite.position = CGPoint(x: sprite.position.x + amountToMove.x, y: sprite.position.y + amountToMove.y)
+        // 使用工具类
+        sprite.position += amountToMove
+        if sprite.position.y > 1080 {
+            print("##### \(sprite.position.y)")
+        }
     }
     
     func moveZombieToward(location: CGPoint) {
         // 获得偏移向量
-        let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
+        //let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
+        let offset = location - zombie.position
         // 获得偏移向量的长度
-        let length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
+        //let length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
+        
         // 设置偏移向量的长度
-        let direction = CGPoint(x: offset.x / CGFloat(length), y: offset.y / CGFloat(length))
-        velocity = CGPoint(x: direction.x * zombieMovePointsPerSec, y: direction.y * zombieMovePointsPerSec)
+        //let direction = CGPoint(x: offset.x / CGFloat(length), y: offset.y / CGFloat(length))
+        // 正规化
+        let direction = offset.normalized()
+        //velocity = CGPoint(x: direction.x * zombieMovePointsPerSec, y: direction.y * zombieMovePointsPerSec)
+        velocity = direction * zombieMovePointsPerSec
     }
     
     // 连续触摸事件
@@ -110,9 +120,17 @@ class GameScene: SKScene {
     // 边界检测
     func boundsCheckZombie() {
         // 左下角
-        let bottomLeft = CGPoint.zero
+        //let bottomLeft = CGPoint.zero
+        let bottomLeft = CGPoint(x: 0, y: playableRect.minY)
+        
         // 右上角
-        let topRight = CGPoint(x: size.width, y: size.height)
+        //let topRight = CGPoint(x: size.width, y: size.height)
+        let topRight = CGPoint(x: size.width, y: playableRect.maxY)
+        
+        //print(bottomLeft)
+        //print(bottomLeft2)
+        //print(topRight)
+        //print(topRight2)
         
         // 如果x轴到达最左边
         if zombie.position.x <= bottomLeft.x {
@@ -148,21 +166,22 @@ class GameScene: SKScene {
     }
     
     // 画矩形
-    func debugDrawPlayableArea() {
-        let shape = SKShapeNode()
-        let path = CGMutablePath.init()
-        // var transform = CGAffineTransform.init(translationX:0, y: -20)
-        // TODO: Nil is not compatible with expected argument type 'UnsafePointer<CGAffineTransform>'
-        // CGPathAddRect(path, nil, playableRect)
-        shape.path = path
-        shape.strokeColor = SKColor.red
-        shape.lineWidth = 4.0
-        addChild(shape)
-    }
+//    func debugDrawPlayableArea() {
+//        let shape = SKShapeNode()
+//        let path = CGMutablePath.init()
+//        // var transform = CGAffineTransform.init(translationX:0, y: -20)
+//        // TODO: Nil is not compatible with expected argument type 'UnsafePointer<CGAffineTransform>'
+//        // CGPathAddRect(path, nil, playableRect)
+//        shape.path = path
+//        shape.strokeColor = SKColor.red
+//        shape.lineWidth = 4.0
+//        addChild(shape)
+//    }
     
     // 旋转僵尸
     func rotateSprite(sprite: SKSpriteNode, direction : CGPoint) {
         sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
+        // sprite.zPosition = direction.angle
     }
     
 //    private var label : SKLabelNode?
