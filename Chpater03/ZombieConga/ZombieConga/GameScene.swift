@@ -70,8 +70,8 @@ class GameScene: SKScene {
         // 旋转精灵
         // background.zRotation = CGFloat(Double.pi) / 8
         // 获取精灵的大小
-        let mySize = background.size
-        print("Size: \(mySize)")
+        // let mySize = background.size
+        // print("Size: \(mySize)")
         // 节点和z位置
         background.zPosition = -1
         
@@ -84,6 +84,8 @@ class GameScene: SKScene {
         // spawnEnemy()
         // 3.7 定期生成
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnEnemy), SKAction.wait(forDuration: 2.0)])))
+        // 3.11 缩放动画，生成小猫
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnCat), SKAction.wait(forDuration: 1.0)])))
         // 定位精灵
         zombie.position = CGPoint(x: 400, y: 400)
     }
@@ -112,7 +114,7 @@ class GameScene: SKScene {
                 zombie.position = lastTouchLocation
                 velocity = CGPoint.zero
                 // 3.10 停止动作
-                stopZombieAnimation()                
+                stopZombieAnimation()
             } else {
                 // 移动精灵
                 moveSprite(sprite: zombie, velocity: velocity)
@@ -122,7 +124,7 @@ class GameScene: SKScene {
         }
         
         // 旋转僵尸
-       // rotateSprite(sprite: zombie, direction: velocity)
+        // rotateSprite(sprite: zombie, direction: velocity)
         // 检查边界
         boundsCheckZombie()
     }
@@ -298,6 +300,27 @@ class GameScene: SKScene {
     // 停止僵尸动画
     func stopZombieAnimation() {
         zombie.removeAction(forKey: "animation")
+    }
+    
+    // 生成小猫
+    func spawnCat() {
+        // 1 生成小猫，位置随机，缩放级别为0，使得小猫不可见
+        let cat = SKSpriteNode(imageNamed: "cat")
+        cat.position = CGPoint(
+            x: CGFloat.random(min: playableRect.minX,
+                              max: playableRect.maxX),
+            y: CGFloat.random(min: playableRect.minY,
+                              max: playableRect.maxY))
+        cat.setScale(0)
+        addChild(cat)
+        // 2 创建一个动作，调用scale(to:duration)来把小猫放大到正常大小，这个动作不是反向的，所以再创建一个类似的动作，将小猫缩放级别变回到0
+        // 在动作序列中，小猫先出现，等待一会儿，消失，然后将其从父节点中删除
+        let appear = SKAction.scale(to: 1.0, duration: 0.5)
+        let wait = SKAction.wait(forDuration: 10.0)
+        let disappear = SKAction.scale(to: 0, duration: 0.5)
+        let removeFromParent = SKAction.removeFromParent()
+        let actions = [appear, wait, disappear, removeFromParent]
+        cat.run(SKAction.sequence(actions))
     }
     
 //    private var label : SKLabelNode?
