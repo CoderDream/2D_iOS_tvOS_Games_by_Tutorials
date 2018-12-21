@@ -325,11 +325,19 @@ class GameScene: SKScene {
         // 0.5秒顺时针旋转22.5°，这个完整的摇摆一共用了1秒钟时间
         let rightWiggle = leftWiggle.reversed()
         let fullWiggle = SKAction.sequence([leftWiggle, rightWiggle])
-        let wiggleWait = SKAction.repeat(fullWiggle, count: 10)
+        // let wiggleWait = SKAction.repeat(fullWiggle, count: 10)
+        // 3.13 组动作
+        let scaleUp = SKAction.scale(by: 1.2, duration: 0.25)
+        let scaleDown = scaleUp.reversed()
+        let fullScale = SKAction.sequence([scaleUp, scaleDown, scaleUp, scaleDown])
+        let group = SKAction.group([fullScale, fullWiggle])
+        let groupWait = SKAction.repeat(group, count: 10)
+        
         let disappear = SKAction.scale(to: 0, duration: 0.5)
         let removeFromParent = SKAction.removeFromParent()
         // let actions = [appear, wait, disappear, removeFromParent]
-        let actions = [appear, wiggleWait, disappear, removeFromParent]
+        // let actions = [appear, wiggleWait, disappear, removeFromParent]
+        let actions = [appear, groupWait, disappear, removeFromParent]
         cat.run(SKAction.sequence(actions))
     }
     
