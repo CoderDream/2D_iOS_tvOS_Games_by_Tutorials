@@ -127,6 +127,8 @@ class GameScene: SKScene {
         // rotateSprite(sprite: zombie, direction: velocity)
         // 检查边界
         boundsCheckZombie()
+        // 3.14 碰撞检测
+        checkCollisions()
     }
     
     // 移动精灵
@@ -244,9 +246,24 @@ class GameScene: SKScene {
         sprite.zRotation += shortest.sign() * amountToRotate
     }
     
+    
+    // 开始僵尸动画
+    func startZombieAnimation() {
+        if zombie.action(forKey: "animation") == nil {
+            zombie.run(SKAction.repeatForever(zombieAnimation), withKey: "animation")
+        }
+    }
+    
+    // 停止僵尸动画
+    func stopZombieAnimation() {
+        zombie.removeAction(forKey: "animation")
+    }
+    
     // 生成敌人
     func spawnEnemy() {
         let enemy = SKSpriteNode(imageNamed: "enemy")
+        // 为节点设置名称
+        enemy.name = "enemy"
         // 将其垂直居中地放在屏幕上，刚好在视图之外的右边
         //enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
         // 3.7 定期生成
@@ -290,22 +307,12 @@ class GameScene: SKScene {
         enemy.run(SKAction.sequence([actionMove, actionRemove]))
     }
     
-    // 开始僵尸动画
-    func startZombieAnimation() {
-        if zombie.action(forKey: "animation") == nil {
-            zombie.run(SKAction.repeatForever(zombieAnimation), withKey: "animation")
-        }
-    }
-    
-    // 停止僵尸动画
-    func stopZombieAnimation() {
-        zombie.removeAction(forKey: "animation")
-    }
-    
     // 生成小猫
     func spawnCat() {
         // 1 生成小猫，位置随机，缩放级别为0，使得小猫不可见
         let cat = SKSpriteNode(imageNamed: "cat")
+        // 为节点设置名称
+        cat.name = "cat"
         cat.position = CGPoint(
             x: CGFloat.random(min: playableRect.minX,
                               max: playableRect.maxX),
@@ -339,6 +346,40 @@ class GameScene: SKScene {
         // let actions = [appear, wiggleWait, disappear, removeFromParent]
         let actions = [appear, groupWait, disappear, removeFromParent]
         cat.run(SKAction.sequence(actions))
+    }
+    
+    func zombieHitCat(cat: SKSpriteNode) {
+        cat.removeFromParent()
+    }
+    
+    func zombieHitEnemy(enemy : SKSpriteNode) {
+        enemy.removeFromParent()
+    }
+    
+    func checkCollisions() {
+        var hitCats : [SKSpriteNode] = []
+        enumerateChildNodes(withName: "cat") { node, _ in
+            let cat = node as! SKSpriteNode
+            // CGRect.intersects
+            if cat.frame.intersects(self.zombie.frame) {
+                hitCats.append(cat)
+            }
+        }
+        for cat in hitCats {
+            zombieHitCat(cat: cat)
+        }
+        
+        var hitEnemies : [SKSpriteNode] = []
+        enumerateChildNodes(withName: "enemy") { node, _ in
+            let enemy = node as! SKSpriteNode
+            if enemy.frame.insetBy(dx: 20, dy: 20).intersects(self.zombie.frame) {
+                hitEnemies.append(enemy)
+            }
+        }
+        
+        for enemy in hitEnemies {
+            zombieHitEnemy(enemy: enemy)
+        }
     }
     
 //    private var label : SKLabelNode?
