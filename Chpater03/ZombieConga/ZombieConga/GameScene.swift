@@ -235,8 +235,14 @@ class GameScene: SKScene {
         let actionMidMove =  SKAction.move(to: CGPoint(x: size.width / 2, y: playableRect.minY + enemy.size.height / 2), duration: 1.0)
         // 2 再移动到最左边
         let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 1.0)
+        // 等待动作
+        let wait = SKAction.wait(forDuration: 0.25)
+        // 3.4 运行代码块动作
+        let logMessage = SKAction.run {
+            print("Reached bottom!")
+        }
         // 3 构造动作序列
-        let sequence = SKAction.sequence([actionMidMove, actionMove])
+        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
         // 4 连续动作
         enemy.run(sequence)
     }
