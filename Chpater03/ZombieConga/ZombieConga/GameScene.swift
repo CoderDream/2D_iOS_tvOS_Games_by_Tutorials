@@ -128,6 +128,10 @@ class GameScene: SKScene {
         // 检查边界
         boundsCheckZombie()
         // 3.14 碰撞检测
+        //checkCollisions()
+    }
+    
+    override func didEvaluateActions() {
         checkCollisions()
     }
     
