@@ -227,8 +227,18 @@ class GameScene: SKScene {
         addChild(enemy)
         
         // 沿着 x 轴向左移动，2秒钟之内移到刚好在屏幕的左边之外
-        let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 2.0)
-        enemy.run(actionMove)
+        // let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 2.0)
+        // enemy.run(actionMove)
+        
+        // 3.2 连续动作
+        // 1 先移动到中间底部
+        let actionMidMove =  SKAction.move(to: CGPoint(x: size.width / 2, y: playableRect.minY + enemy.size.height / 2), duration: 1.0)
+        // 2 再移动到最左边
+        let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 1.0)
+        // 3 构造动作序列
+        let sequence = SKAction.sequence([actionMidMove, actionMove])
+        // 4 连续动作
+        enemy.run(sequence)
     }
     
 //    private var label : SKLabelNode?
