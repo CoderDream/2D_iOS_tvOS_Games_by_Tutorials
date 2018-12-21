@@ -8,8 +8,8 @@ section: 1
 
 If you completed the challenges from the previous chapter, you now have a rather large zombie on the screen:
 
-![bordered width=50% print](/images/001_BigZombie.png)
-![bordered width=60% screen](/images/001_BigZombie.png)
+![bordered width=50% print](images/001_BigZombie.png)
+![bordered width=60% screen](images/001_BigZombie.png)
  
 > **Note**: If you were unable to complete the challenges or skipped ahead from the previous chapter, don’t worry—simply open the starter project from this chapter to pick up where the previous chapter left off.
 
@@ -27,11 +27,11 @@ However, to set a sprite’s position over time, you need a method that the game
 
 A game works like a flipbook animation. You draw a successive sequence of images, and when you flip through them fast enough, it gives the illusion of movement.
 
-![width=50%](/images/002_Flipbook.png)
+![width=50%](images/002_Flipbook.png)
  
 Each individual picture that you draw is called a **frame**. Games typically try to draw frames between 30 to 60 times per second so that the animations feel smooth. This rate of drawing is called the **frame rate**, or specifically **frames per second (FPS)**. By default, Sprite Kit displays this in the bottom-right corner of your game:
 
-![iphone-landscape bordered](/images/003_BigZombieFPS.png)
+![iphone-landscape bordered](images/003_BigZombieFPS.png)
  
 > **Note**: It’s handy of Sprite Kit to show your frames per second onscreen by default, because you want to keep an eye on the FPS as you develop your game to make sure your game is performing well. Ideally, you want at least 30 FPS.
 >
@@ -45,7 +45,7 @@ Each individual picture that you draw is called a **frame**. Games typically try
 
 Behind the scenes, Sprite Kit runs an endless loop, often referred to as the **game loop**, which looks like this:
 
-![width=50%](/images/004_GameLoop.png)
+![width=50%](images/004_GameLoop.png)
  
 This illustrates that each frame, Sprite Kit does the following:
 
@@ -91,7 +91,7 @@ Here, you update the position of the zombie to be eight more points along the x-
 
 Build and run, and you’ll see the zombie move across the screen:
 
-![width=50%](/images/005_MovingZombie.png)
+![width=50%](images/005_MovingZombie.png)
  
 This is great stuff, but the movement feels a bit jagged or irregular. To see why, let’s go back to the Sprite Kit game loop.
 
@@ -141,7 +141,7 @@ As you can see, the amount of time between calls to `update()` always varies sli
 
 Since you’re updating the position of the zombie a fixed amount per frame rather than taking this time variance into consideration, you’re likely to wind up with movement that looks jagged or irregular.
 
-![width=100%](/images/006_JaggedMovement.png)
+![width=100%](images/006_JaggedMovement.png)
  
 The correct solution is to figure out how far you want the zombie to move per second and then multiply this by the fraction of a second since the last update. Let’s give it a shot.
 
@@ -167,7 +167,7 @@ $[=p=]
 
 A 2D vector represents a **direction** and a **length**:
 
-![width=50%](/images/007_Vector.png)
+![width=50%](images/007_Vector.png)
 
 The diagram above shows an example of a 2D vector you might use to represent the zombie’s movement. You can see that the orientation of the arrow shows the **direction** in which the zombie should move, while the arrow’s **length** indicates how far the zombie should move in a second. The direction and length together represent the zombie’s **velocity**–you can think of it as how far and in what direction the zombie should move in 1 second.
 
@@ -192,11 +192,11 @@ You’ve refactored the code into a reusable method that takes the sprite to be 
 
 1. Velocity is in points per second, and you need to figure out how many points to move the zombie this frame. To determine that, this section multiplies the points per second by the fraction of seconds since the last update. You now have a point representing the zombie’s position—which you can also think of as a vector from the origin to the zombie’s position—as well as a vector representing the distance and direction to move the zombie this frame:
 
-![width=70%](/images/008_Zombie1.png)
+![width=70%](images/008_Zombie1.png)
  
 2. To determine the zombie’s new position, simply add the vector to the point:
 
-![width=70%](/images/009_Zombie2.png)
+![width=70%](images/009_Zombie2.png)
  
 You can visualize this with the diagram above, but in code you simply add the `x`- and `y`-components of the point and the vector together.
 
@@ -236,11 +236,11 @@ First, you need to figure out the offset between the location of the player’s 
 
 Subtracting points and vectors is similar to adding them, but instead of adding the `x`- and `y`- components, you—that’s right—subtract them! :]
 
-![width=70%](/images/010_Subtract1.png)
+![width=70%](images/010_Subtract1.png)
  
 This diagram illustrates that if you subtract the zombie position from the tap position, you get a vector showing the offset amount. You can see this even more clearly if you move the offset vector so it begins from the zombie’s position:
 
-![width=70%](/images/011_Subtract2.png)
+![width=70%](images/011_Subtract2.png)
  
 By subtracting these two positions, you get something with a direction and a length. Call this the offset vector.
 
@@ -261,11 +261,11 @@ Now you need to figure out the length of the offset vector, a piece of informati
 
 Think of the offset vector as the hypotenuse of a right triangle, where the lengths of the other two sides of the triangle are defined by the `x`- and `y`- components of the vector:
 
-![width=90%](/images/012_Length1.png)
+![width=90%](images/012_Length1.png)
  
 You want to find the length of the hypotenuse. To do this, you can use the Pythagorean theorem. You may remember this simple formula from geometry—it says that the length of the hypotenuse is equal to the square root of the sum of the squares of the two sides.
 
-![width=90%](/images/013_Length2.png)
+![width=90%](images/013_Length2.png)
  
 Put this theory into practice. Add the following line to the bottom of `moveZombieToward()`:
 
@@ -292,13 +292,13 @@ So you’re halfway there—your vector points in the right direction, but isn�
 
 The first step is to convert the offset vector into a **unit vector**, which means a vector of length 1. According to geometry, you can do this by simply dividing the offset vector’s `x`- and `y`- components by the offset vector’s length.
 
-![width=100%](/images/014_UnitVector.png)
+![width=100%](images/014_UnitVector.png)
  
 This process of converting a vector into a unit vector is called **normalizing** a vector.
 
 Once you have this unit vector, which you know is of length 1, it’s easy to multiply it by `zombieMovePointsPerSec` to make it the exact length you want.
 
-![width=100%](/images/015_UnitVector2.png)
+![width=100%](images/015_UnitVector2.png)
  
 Give it a try. Add the following lines to the bottom of `moveZombieToward()`:
 
@@ -351,7 +351,7 @@ moveSprite(zombie, velocity: velocity)
 
 That’s it! Build and run, and now the zombie will chase your taps. Just don’t get too close—he’s hungry!
 
-![iphone-landscape bordered](/images/016_MovingZombie.png)
+![iphone-landscape bordered](images/016_MovingZombie.png)
  
 > **Note**: You can also use gesture recognizers with Sprite Kit. These can be especially handy if you’re trying to implement complicated gestures, such as pinching or rotating.
 >
@@ -401,13 +401,13 @@ boundsCheckZombie()
 
 Build and run, and you have a zombie bouncing around the screen. I told you he was ready to party!
 
-![iphone-landscape bordered](/images/017_BouncingZombie.png)
+![iphone-landscape bordered](images/017_BouncingZombie.png)
  
 ### Iteration 5: Playable area
 
 Run the game on your iPhone 6 simulator and move your zombie toward the top of the screen. Notice that your zombie moves offscreen before he bounces back!
 
-![iphone-landscape bordered](/images/018_WheresMyZombie.png)
+![iphone-landscape bordered](images/018_WheresMyZombie.png)
  
 Run the game on the iPad simulator, and you’ll see the game works as expected. Does this give you a clue as to what’s going on?
 
@@ -415,8 +415,8 @@ Recall from the "Universal app support" section in Chapter 1 that Zombie Conga h
 
 Let’s take a look at what happens with a 16:9 device. Since you’ve configured the scene to use aspect fill, Sprite Kit first calculates the largest 16:9 rectangle that fits within the 2048x1536 space: that's 2048x1152. It then centers that rectangle and scales it to fit the actual screen size; for example, the iPhone 6's 1334x750 screen requires scaling by ~0.65.
 
-![width=68% print](/images/019_PlayableArea.png)
-![width=80% screen](/images/019_PlayableArea.png)
+![width=68% print](images/019_PlayableArea.png)
+![width=80% screen](images/019_PlayableArea.png)
  
 This means that on 16:9 devices, there are 192-point gaps at the top and bottom of the scene that won’t be visible (1536 - 1152 = 384. 384 / 2 = 192). Hence, you should avoid critical gameplay in those areas—such as letting the zombie move in those gaps.
 
@@ -488,11 +488,11 @@ let topRight = CGPoint(x: size.width,
 
 Build and run, and you’ll see the zombie now bounces correctly, according to the playable rectangle, drawn in red and matched to the corners of the screen:
 
-![iphone-landscape bordered](/images/020_PlayableArea2.png)
+![iphone-landscape bordered](images/020_PlayableArea2.png)
  
 Then build and run on an iPad simulator, and you’ll see the zombie bounces correctly there, as well, according to the playable rectangle: 
 
-![ipad-landscape bordered](/images/021_PlayableArea3.png)
+![ipad-landscape bordered](images/021_PlayableArea3.png)
  
 The playable area outlined in red is exactly what you see on the iPhone device, which has the largest supported aspect ratio, 16:9.
 
@@ -510,7 +510,7 @@ You already have a vector that includes the direction the zombie is facing: velo
 
 Once again, think of the direction vector as the hypotenuse of a right triangle. You want to find the angle:
 
-![width=95%](/images/022_FindAngle.png)
+![width=95%](images/022_FindAngle.png)
  
 You may remember from trigonometry the mnemonic _SOH CAH TOA_, where the last part stands for:
 
@@ -549,7 +549,7 @@ rotateSprite(zombie, direction: velocity)
 
 Build and run, and the zombie rotates to face the direction in which he’s moving:
 
-![iphone-landscape bordered](/images/023_RotateZombie.png)
+![iphone-landscape bordered](images/023_RotateZombie.png)
  
 Congratulations, you’ve given your zombie life! The sprite moves smoothly, bounces off the edges of the screen and rotates on both the iPhone and the iPad—a great start to a game.
 
@@ -758,13 +758,13 @@ extension CGFloat {
 
 1. Angles “wrap around” after 360 degrees (2 * `M_PI`). In other words, 30 degrees and 390 degrees represent the same angle.
 
-![width=70% print](/images/024_Shortest1.png)
-![width=85% screen](/images/024_Shortest1.png)
+![width=70% print](images/024_Shortest1.png)
+![width=85% screen](images/024_Shortest1.png)
  
 2. Sometimes the shortest way to rotate between two angles is to go left, and other times to go right. For example, if you start at 0 degrees and want to turn to 270 degrees, it’s shorter to turn -90 degrees than to turn 270 degrees. You don’t want your zombie turning the long way around—he may be undead, but he’s not stupid!
 
-![width=70% print](/images/025_Shortest2.png)
-![width=85% screen](/images/025_Shortest2.png)
+![width=70% print](images/025_Shortest2.png)
+![width=85% screen](images/025_Shortest2.png)
  
 So this routine finds the difference between the two angles, chops off any amount greater than 360 degrees and then decides if it’s faster to go right or left.
 

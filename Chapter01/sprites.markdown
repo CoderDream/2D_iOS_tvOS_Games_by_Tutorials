@@ -9,7 +9,7 @@ section: 1
 Now that you know what Sprite Kit is and why you should use it, it’s time to try it out for yourself!
 
 The first minigame you will build in this book is called Zombie Conga. Here’s what it will look like when you’re finished:
-![width=80%](/images/001_FinalGame.png)
+![width=80%](images/001_FinalGame.png)
 
 In Zombie Conga, you take the role of a happy-go-lucky zombie who wants to party! 
 
@@ -39,22 +39,22 @@ Let’s get this conga started!
 
 Start Xcode and select **File\New\Project...** from the main menu. Select the **iOS\Application\Game** template and click **Next**.
 
-![bordered width=60% print](/images/002_NewProject.png)
-![bordered width=80% screen](/images/002_NewProject.png)
+![bordered width=60% print](images/002_NewProject.png)
+![bordered width=80% screen](images/002_NewProject.png)
 
 Enter **ZombieConga** for the Product Name, choose **Swift** for Language, **SpriteKit** for Game Technology, **Universal** for Devices and click **Next**. 
 
-![bordered width=60% print](/images/003_Options.png)
-![bordered width=80% screen](/images/003_Options.png)
+![bordered width=60% print](images/003_Options.png)
+![bordered width=80% screen](images/003_Options.png)
 
 
 Select somewhere on your hard drive to save your project and click **Create**. At this point, Xcode will generate a simple Sprite Kit starter project for you. 
 
 Take a look at what Sprite Kit made. In Xcode’s toolbar, select the iPhone 6 and click **Play**.
-![width=70% bordered](/images/004_Play.png)
+![width=70% bordered](images/004_Play.png)
 
 After a brief splash screen, you’ll see a single label that says, “Hello, World!” When you click on the screen, a rotating space ship will appear.
-![iphone bordered](/images/005_HelloWorld.png)
+![iphone bordered](images/005_HelloWorld.png)
 
 In Sprite Kit, a single object called a scene controls each “screen” of your app. A scene is a subclass of Sprite Kit’s `SKScene` class.
 
@@ -75,10 +75,10 @@ class GameScene: SKScene {
 `didMoveToView()` is the method that Sprite Kit calls before it presents your scene in a view; it’s a good place to do some initial setup of your scene’s contents. Here, you simply set the background color to black.
 
 Zombie Conga is designed to run in landscape mode, so let’s configure the app for this. Select the **ZombieConga** project in the project navigator and then select the **ZombieConga** target. Go to the **General** tab and make sure only **Landscape Left** and **Landscape Right** are checked:
-![width=95% bordered](/images/006_Landscape.png)
+![width=95% bordered](images/006_Landscape.png)
 
 You also need to modify this in one more spot. Open **Info.plist** and find the **Supported interface orientations (iPad)** entry. Delete the entries for **Portrait (bottom home button)** and **Portrait (top home button)** that you see there, so only the landscape options remain.
-![width=95% bordered](/images/007_Landscape2.png)
+![width=95% bordered](images/007_Landscape2.png)
 
 The Sprite Kit template automatically creates a file named **GameScene.sks**. You can edit this file with Xcode’s built-in scene editor to lay out your game scene visually. Think of the scene editor as a simple Interface Builder for Sprite Kit.
 
@@ -125,7 +125,7 @@ The scenes for the games in this book have been designed with a base size of 204
 This results in your scene appearing as-is on the iPad Retina, which has a resolution of 2048x1536, but as scaled/cropped on the iPhone to fit the phone’s smaller size and different aspect ratio.
 
 Here are a few examples of how the games in this book will look in landscape orientation on different devices, moving from smallest to largest aspect ratio: 
-![width=100%](/images/008_SceneSizes.jpg)
+![width=100%](images/008_SceneSizes.jpg)
 
 * **iPad Retina [4:3 or 1.33]**: Displayed as-is to fit the 2048x1536 screen size.
 * **iPad Non-Retina [4:3 or 1.33]**: Aspect fill will scale a 2048x1536 visible area by 0.5 to fit the 1024x768 screen.
@@ -148,16 +148,16 @@ Next, you need to add the game art to the project.
 
 In Xcode, open **Assets.xcassets**, select the **Spaceship** entry and press your delete key to remove it— unfortunately, this is not a game about space zombies! ☺ At this point, only **AppIcon** will remain:
 
-![width=100% bordered](/images/009_NoSpaceship.png)
+![width=100% bordered](images/009_NoSpaceship.png)
 
 $[=p=]
 
 With **AppIcon** selected, drag the appropriate icon from **starter\resources\icons** into each slot:
 
-![width=80% bordered](/images/010_Icons.png)
+![width=80% bordered](images/010_Icons.png)
 
 Then drag all of the files from **starter\resources\images** into the left sidebar:
-![width=80% bordered](/images/011_DraggingImages.png)
+![width=80% bordered](images/011_DraggingImages.png)
 
 By including your images in the asset catalog, behind the scenes Xcode will build **texture atlases** containing these images and use them in your game, which will automatically increase performance. 
 
@@ -176,24 +176,24 @@ Your app actually has a launch screen already. When you launched your app earlie
 In iOS, apps have a special **launch screen** file; this is basically a storyboard, LaunchScreen.storyboard in this project, that you can configure to present something onscreen while your app is loading. The advantage of this over the old method of just displaying an image is that you can use Auto Layout to have much finer control of how this screen looks on different devices.
 
 Let’s try this out. Open **LaunchScreen.storyboard**. You'll see the following:
-![width=50%](/images/012_LaunchScreen.png)
+![width=50%](images/012_LaunchScreen.png)
 
 $[=p=]
 
 In the Object Library on the right sidebar, drag an image view into the view and resize it to fill the entire area:
-![width=80% bordered](/images/013_ImageView.png)
+![width=80% bordered](images/013_ImageView.png)
 
 Next, you need to set the image view so that it always has the same width and height as its containing view. To do this, make sure the image view is selected and then click the **Pin** button in the lower right—it looks like a tie fighter. In the Add New Constraints screen, click the four light-red lines so that the image view is pinned to each edge. Make sure that **Constrain to margins** isn't checked and that all values are set to 0, then click **Add 4 Constraints**:
-![width=40% bordered](/images/014_NewConstraints.png)
+![width=40% bordered](images/014_NewConstraints.png)
 
 With the image view still selected, make sure the Attributes Inspector is selected—it's the fourth tab on the right. Set the **Image** to **MainMenu** and set the **View Mode** to **Aspect Fill**: 
-![width=95% bordered](/images/015_AspectFill.png)
+![width=95% bordered](images/015_AspectFill.png)
 
 Build and run your app again. This time, you'll see a brief Zombie Conga splash screen:
-![iphone-landscape bordered](/images/016_SplashScreen.png)
+![iphone-landscape bordered](images/016_SplashScreen.png)
 
 Which is quickly followed by a (mostly) blank, black screen:
-![iphone-landscape bordered](/images/017_60FPS.png)
+![iphone-landscape bordered](images/017_60FPS.png)
 
 This may not look like much, but you now have a starting point upon which to build your first Sprite Kit game.
 
@@ -202,7 +202,7 @@ Let’s move on to the next task, which also happens to be one of the most impor
 ## Displaying a sprite
 
 When making a 2D game, you usually put images on the screen representing your game’s various elements: the hero, enemies, bullets and so on. Each of these images is called a **sprite**.
-![width=100%](/images/018_Sprites.png)
+![width=100%](images/018_Sprites.png)
 
 Sprite Kit has a special class called `SKSpriteNode` that makes it easy to create and work with sprites. This is what you’ll use to add all your sprites to the game. Let’s give it a try.
 
@@ -231,7 +231,7 @@ addChild(background)
 ```
 
 You’ll learn about nodes and scenes later. For now, build and run again, and you’ll see part of the background appear in the bottom left of the screen:
-![iphone-landscape bordered](/images/019_BottomLeft.png)
+![iphone-landscape bordered](images/019_BottomLeft.png)
 
 Obviously, that’s not quite what you want. To get the background in the correct spot, you have to set its position.
 
@@ -270,7 +270,7 @@ struct CGSize {
 4. A sprite’s position is within the coordinate space of its parent node, which in this case is the scene itself. You’ll learn more about this in Chapter 5, “Camera”.
 
 Build and run, and now your background is fully visible:
-![iphone-landscape bordered](/images/020_Background.png)
+![iphone-landscape bordered](images/020_Background.png)
 
 > **Note**: You may notice you can’t see the entire background on iPhone devices—parts of it overlap on the top and bottom. This is by design, so the game works on both the iPad and the iPhone, as discussed in the "Universal app support" section earlier in this chapter.
 
@@ -281,7 +281,7 @@ Setting the position of the background sprite means setting the *center* of the 
 This explains why you could only see the upper half of the sprite earlier. Before you set the position, it defaulted to (0, 0), which placed the center of the sprite in the lower-left corner of the screen, so you could only see the top half.
 
 You can change this behavior by setting a sprite’s anchor point. Think of the anchor point as “the spot within a sprite that you pin to a particular position”. Here's an illustration showing a sprite positioned at the center of the screen, but with different anchor points:
-![width=100%](/images/021_AnchorPoints.png)
+![width=100%](images/021_AnchorPoints.png)
  
 To see how this works, find the line that sets the background’s position to the center of the screen and replace it with the following:
 
@@ -293,7 +293,7 @@ background.position = CGPoint.zero
 `CGPoint.zero` is a handy shortcut for (0, 0). Here, you set the anchor point of the sprite to (0, 0) to pin the lower-left corner of the sprite to whatever position you set—in this case, also (0, 0).
 
 Build and run, and the image is still in the right spot:
-![iphone-landscape bordered](/images/020_Background.png)
+![iphone-landscape bordered](images/020_Background.png)
 
 This works because now you're pinning the lower-left corner of the background image to the lower-left corner of the scene. 
 
@@ -316,7 +316,7 @@ Rotation values are in radians, which are units used to measure angles. This exa
 > Note: I don’t know about you, but I find it easier to think about rotations in degrees rather than in radians. Later in the book, you’ll create helper routines to convert between degrees and radians.
 
 Build and run, and check out your rotated background sprite:
-![iphone-landscape bordered](/images/022_RotatedBg.png)
+![iphone-landscape bordered](images/022_RotatedBg.png)
 
 This demonstrates an important point: Sprites are rotated about their anchor points. Since you set this sprite’s anchor point to (0, 0), it rotates around its bottom-left corner.
 
@@ -330,7 +330,7 @@ background.anchorPoint = CGPoint(x: 0.5, y: 0.5) // default
 ```
 
 Build and run, and this time the background sprite will have rotated about the center:
-![iphone-landscape bordered](/images/023_RotatedBg2.png)
+![iphone-landscape bordered](images/023_RotatedBg2.png)
  
 This is all good to know! But for Zombie Conga, you don’t want a rotated background, so comment out that line:
 
@@ -340,7 +340,7 @@ This is all good to know! But for Zombie Conga, you don’t want a rotated backg
 
 If you’re wondering when you might want to change the anchor point in a game, imagine you’re creating a character’s body out of different sprites—one each for the head, torso, left arm, right arm, left leg and right leg:
 
-![width=70%](/images/024_Mouse.png)
+![width=70%](images/024_Mouse.png)
  
 If you wanted to rotate these body parts at their joints, you’d have to modify the anchor point for each sprite, as shown in the diagram above.
 
@@ -438,10 +438,10 @@ Here are a few hints:
 * Also inside `didMoveToView()`, add the zombie to the scene.
 
 If you’ve got it right, you'll see the zombie appear onscreen like so:
-![iphone-landscape bordered](/images/027_Zombie.png)
+![iphone-landscape bordered](images/027_Zombie.png)
  
 Run your game on the iPad Air 2 simulator to prove it works there, as well—just with a bigger viewable area! 
-![ipad-landscape bordered](/images/028_iPad.png)
+![ipad-landscape bordered](images/028_iPad.png)
  
 ### Challenge 2: Further documentation
 
@@ -450,7 +450,7 @@ This chapter covers everything you need to know about sprites and nodes to keep 
 However, it’s good to know where to find more information in case you ever have questions or get stuck. I highly recommend you check out Apple’s *SKNode Class Reference* and *SKSpriteNode Class Reference*, as these cover the two classes you’ll use most often in Sprite Kit, and it’s good to have a basic familiarity with the properties and methods they contain.
 
 You can find the references in Xcode by selecting **Help\Documentation and API Reference** from the main menu and searching for `SKNode` or `SKSpriteNode`. 
-![width=95% bordered](/images/029_Documentation.png)
+![width=95% bordered](images/029_Documentation.png)
 
 And now for your second challenge: Use the information in these docs to double (scale to 2x) the zombie’s size. Answer this question: Did you use a method of `SKSpriteNode` or `SKNode` to do this?
 

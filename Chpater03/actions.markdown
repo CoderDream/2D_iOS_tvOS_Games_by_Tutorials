@@ -22,8 +22,8 @@ You’ll see how actions can simplify your game-coding life, and by the time you
 
 Right now, your zombie’s “life” is a bit too carefree. Let’s add action to this game by introducing enemies to dodge: crazy cat ladies!
 
-![width=70% print](/images/000_CrazyCatLady.png)
-![width=80% screen](/images/000_CrazyCatLady.png)
+![width=70% print](images/000_CrazyCatLady.png)
+![width=80% screen](images/000_CrazyCatLady.png)
 
 Open **GameScene.swift** and create the start of a new method to spawn an enemy:
 
@@ -63,7 +63,7 @@ spawnEnemy()
 
 Build and run, and you'll see the crazy cat lady race across the screen:
 
-![iphone-landscape bordered](/images/001_CatLady1.png)
+![iphone-landscape bordered](images/001_CatLady1.png)
  
 Not bad for only two lines of code, eh? You could have even done it with a single line of code if you didn’t need to use the `actionMove` constant for anything else.
 
@@ -72,7 +72,7 @@ Here you saw an example of `moveTo(duration:)`, but there are a few other move a
 * **moveToX(duration:)** and **moveToY(duration:)**. These allow you to specify a change in only the `x`- or `y`-position; the other is assumed to remain the same. You could have used `moveToX(duration:)` in the example above to save a bit of typing. 
 * **moveByX(y:duration:)**. The “move to” actions move the sprite to a particular point, but sometimes it’s convenient to move a sprite as an offset from its current position, wherever that may be. You could’ve used `moveByX(y:duration:)` in the example above, passing `-(size.width + enemy.size.width)` for `x` and 0 for `y`. 
 
-![width=100%](/images/002_MoveToVsMoveBy.png)
+![width=100%](images/002_MoveToVsMoveBy.png)
  
 You’ll see this pattern of “[action] to” and “[action] by” variants for other action types, as well. In general, you can use whichever of these is more convenient for you—but keep in mind that if either works, the “[action] by” actions are preferable because they're reversible. For more on this topic, keep reading.
 
@@ -107,8 +107,8 @@ Let’s go over this line by line:
 
 That’s it! Build and run, and you’ll see the crazy cat lady “bounce” off the bottom of the playable rectangle:
 
-![bordered width=50% print](/images/003_CatLady2.png)
-![iphone-landscape bordered screen](/images/003_CatLady2.png)
+![bordered width=50% print](images/003_CatLady2.png)
+![iphone-landscape bordered screen](images/003_CatLady2.png)
  
 The sequence action is one of the most useful and commonly used actions—chaining actions together is just so powerful! You’ll use the sequence action many times in this chapter and throughout the rest of this book.
 
@@ -130,8 +130,8 @@ To create a wait-for-duration action, call `waitForDuration()` with the amount o
 
 Build and run, and now the cat lady will briefly pause at the bottom of the V:
 
-![width=50% print](/images/004_CatLady3.png)
-![iphone-landscape bordered screen](/images/004_CatLady3.png)
+![width=50% print](images/004_CatLady3.png)
+![iphone-landscape bordered screen](images/004_CatLady3.png)
  
 ## Run-block action
 
@@ -177,12 +177,12 @@ But Sprite Kit gives you a better option. You can reverse certain actions in Spr
 
 For example, if you run a `moveByX(y:duration:)` action, you can run the reverse of that action to go back the other way:
 
-![width=100%](/images/005_Reversed.png)
+![width=100%](images/005_Reversed.png)
  
 Not all actions are reversible—for example, `moveTo(duration:)` is not. To find out if an action is reversible, look it up in the `SKAction` class reference, which indicates it plainly.
 
-![bordered width=85% print](/images/006_Docs.png)
-![bordered width=95% screen](/images/006_Docs.png)
+![bordered width=85% print](images/006_Docs.png)
+![bordered width=95% screen](images/006_Docs.png)
  
 Let’s try this out. First, replace the declarations of `actionMidMove` and `actionMove` in `spawnEnemy()` with the following code:
 
@@ -218,7 +218,7 @@ Then, you create the reverse of those actions by calling `reversedAction()` on e
 
 Build and run, and now the cat lady will go one way, then back the other way:
 
-![iphone-landscape bordered](/images/007_CatLady4.png)
+![iphone-landscape bordered](images/007_CatLady4.png)
  
 > **Note**: If you try to reverse an action that isn't reversible, then `reversedAction()` will return the same action. 
 
@@ -256,7 +256,7 @@ Here, you create an action that repeats the sequence of other actions endlessly,
 
 Build and run, and now your cat lady will continuously bounce back and forth. I told you she’s crazy!
 
-![iphone-landscape bordered](/images/008_CatLady5.png)
+![iphone-landscape bordered](images/008_CatLady5.png)
  
 Congratulations! You now understand many useful types of actions:
 
@@ -336,7 +336,7 @@ Note that you’re running the action on the scene itself. This works because th
 
 Build and run, and the crazy cat ladies will spawn endlessly, at varying positions:
 
-![iphone-landscape bordered](/images/009_CatLady6.png)
+![iphone-landscape bordered](images/009_CatLady6.png)
  
 ## Remove-from-parent action
 
@@ -373,11 +373,11 @@ In fact, this is what animations do for you: automatically swap out your sprite�
 
 Zombie Conga already includes some animation frames for the zombie. As you can see below, you have four textures to use as frames to show the zombie walking:
 
-![width=100%](/images/010_ZombieFrames.png)
+![width=100%](images/010_ZombieFrames.png)
  
 You want to play the frames in this order:
 
-![width=100%](/images/011_FrameOrder.png)
+![width=100%](images/011_FrameOrder.png)
  
 You can then repeat this endlessly for a continuous walk animation.
 
@@ -429,8 +429,8 @@ This runs the action wrapped in a repeat-forever action, which will seamlessly c
 
 Build and run, and now your zombie will strut in style!
 
-![width=50% bordered screen](/images/012_ZombieStrut.png)
-![iphone-landscape bordered print](/images/012_ZombieStrut.png)
+![width=50% bordered screen](images/012_ZombieStrut.png)
+![iphone-landscape bordered print](images/012_ZombieStrut.png)
  
 ## Stopping action
 
@@ -528,7 +528,7 @@ This is very similar to the way you spawned the enemies. You run a sequence that
 
 Build and run, and you’ll see cats pop in and out of the game:
 
-![iphone-landscape bordered](/images/013_Cats.png)
+![iphone-landscape bordered](images/013_Cats.png)
  
 You should be aware of a few variants of the scale action:
 
@@ -540,7 +540,7 @@ You should be aware of a few variants of the scale action:
 
 The cats in this game should be appealing enough that the player wants to pick them up, but right now they’re just sitting motionless. 
 
-![width=30%](/images/014_Meh.png)
+![width=30%](images/014_Meh.png)
  
 Let’s give them some charm by making them wiggle back and forth while they sit.
 
@@ -572,7 +572,7 @@ You create a `fullWiggle` by rotating left and then right. Now the cat has compl
 
 Build and run, and now your cats look like they’ve had some catnip!
 
-![iphone-landscape bordered](/images/015_CatWiggle.png)
+![iphone-landscape bordered](images/015_CatWiggle.png)
  
 ## Group action
 
@@ -605,7 +605,7 @@ $[=p=]
 
 Build and run, and your cats will bounce with excitement:
 
-![iphone-landscape bordered](/images/016_CatBounce.png)
+![iphone-landscape bordered](images/016_CatBounce.png)
  
 > **Note:** The duration of a group action is equal to the longest duration of any of the actions it contains. So if you include an action that takes one second and another that takes 10 seconds, both actions will begin to run at the same time, and after one second, the first action will be complete. The group action will continue to execute for nine more seconds until the other action is complete.
 
@@ -682,7 +682,7 @@ Note that you don’t remove the nodes from within the enumeration. It’s unsaf
 
 Also, notice that you do a little trick for the cat lady. Remember that the frame of a sprite is the sprite’s entire image, including transparent space:
 
-![width=25%](/images/017_TransparentSpace.png)
+![width=25%](images/017_TransparentSpace.png)
  
 That means if the zombie went into the area of transparent space at the top of the cat lady image, it would “count” as a hit. Totally unfair!
 
@@ -696,7 +696,7 @@ checkCollisions()
 
 Build and run, and now when you collide with a cat or enemy, it disappears from the scene. It’s your first small step toward the zombie apocalypse!
 
-![iphone-landscape bordered](/images/018_Collisions.png)
+![iphone-landscape bordered](images/018_Collisions.png)
  
 $[=p=]
 
@@ -706,11 +706,11 @@ There's a slight problem with the way you’re detecting collisions, and it’s 
 
 Earlier, you learned that during Sprite Kit’s game loop, first `update()` gets called, then some “other stuff” occurs, and finally Sprite Kit renders the screen:
 
-![width=50%](/images/019_GameLoop1.png)
+![width=50%](images/019_GameLoop1.png)
  
 One of the things in the “other stuff” section is the evaluation of the actions you’ve been learning about in this chapter:
  
-![width=50%](/images/020_GameLoop2.png)
+![width=50%](images/020_GameLoop2.png)
 
 Herein lies the problem with your current collision detection method. You check for collisions at the end of the `update()` loop, but Sprite Kit doesn’t evaluate the actions until _after_ this `update()` loop. Therefore, your collision detection code is always one frame behind!
 
@@ -818,7 +818,7 @@ This chapter covers the most important actions in Sprite Kit, but it doesn’t c
 
 Open the project in Xcode and build and run. You’ll see something like the following:
 
-![iphone-landscape bordered](/images/021_ActionsCatalog.png)
+![iphone-landscape bordered](images/021_ActionsCatalog.png)
  
 Each scene in the app demonstrates a particular set of actions, shown as the part of the label before the backslash. This first example demonstrates the various move actions.
 
@@ -868,7 +868,7 @@ This game is called Zombie Conga, but there’s no conga line to be seen just ye
 
 Your challenge is to fix that. You’ll modify the game so that when the zombie collides with a cat, instead of disappearing, the cat joins your conga line!
 
-![iphone-landscape bordered](/images/022_CongaLine.png)
+![iphone-landscape bordered](images/022_CongaLine.png)
  
 In the process of doing this, you’ll get more practice with actions, and you’ll also review the vector math material you learned in the last chapter. Yes, that stuff still comes in handy when working with actions!
 
