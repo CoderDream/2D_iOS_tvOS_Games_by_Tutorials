@@ -27,12 +27,25 @@ class GameScene: SKScene {
     var lastTouchLocation :CGPoint?
     // 僵尸每秒应该旋转的弧度数
     let zombieRotateRadiansPerSec : CGFloat = 4.0 * π
+    // 僵尸的动画动作
+    let zombieAnimation : SKAction
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
         let playableHeight = size.width / maxAspectRatio                    // 2
         let playableMargin = (size.height - playableHeight) / 2.0           // 3
         playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)   // 4
+        // 1 创建一个数组，存储在动画中运行的所有材质
+        var textures : [SKTexture] = []
+        // 2 新增zombie1、2、3、4
+        for i in 1 ... 4 {
+            textures.append(SKTexture(imageNamed: "zombie\(i)"))
+        }
+        // 3 添加第3帧和第2帧，这样得到序列1、2、3、4、3、2
+        textures.append(textures[2])
+        textures.append(textures[1])
+        // 4
+        zombieAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
         super.init(size: size)
     }
     
@@ -65,6 +78,8 @@ class GameScene: SKScene {
         // zombie.size = CGSize(width: 314, height: 204)
         // 把精灵加到场景
         addChild(zombie)
+        // 3.9 动画动作
+        zombie.run(SKAction.repeatForever(zombieAnimation))
         // 生成敌人
         // spawnEnemy()
         // 3.7 定期生成
