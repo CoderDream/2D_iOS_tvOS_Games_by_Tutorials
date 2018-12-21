@@ -252,7 +252,10 @@ class GameScene: SKScene {
         let halfSquence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
         let sequence = SKAction.sequence([halfSquence, halfSquence.reversed()])
         // 4 连续动作
-        enemy.run(sequence)
+        // enemy.run(sequence)
+        // 3.6 重复动作
+        let repeatAction = SKAction.repeatForever(sequence)
+        enemy.run(repeatAction)
     }
     
 //    private var label : SKLabelNode?
