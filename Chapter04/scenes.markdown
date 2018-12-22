@@ -8,7 +8,7 @@ section: 1
 
 Zombie Conga is beginning to look like a real game. It has character movement, enemies, sounds, animation, collision detection—and if you finished the challenges from the last chapter, even its namesake: a conga line!
  
-![iphone-landscape bordered](/images/001_Conga.png)
+![iphone-landscape bordered](images/001_Conga.png)
 
 However, right now all the action takes place in a single **scene** of the game: the default `GameScene` created for you by the Sprite Kit project template.
 
@@ -122,7 +122,7 @@ Here, you check if there are more than 15 cats in the train, and you make sure t
 
 Build and run, and see if you can collect 15 cats. 
 
-![width=90%](/images/002_Kittens.png)
+![width=90%](images/002_Kittens.png)
  
 When you do, you’ll see the following message in the console:
 
@@ -138,8 +138,8 @@ To create a new scene, you simply create a new class that derives from `SKScene`
 
 For now, you’re going to keep things simple with a bare-bones new scene. In Xcode’s main menu, select **File\New\File...**, select the **iOS\Source\Swift File** template and click **Next**. 
 
-![bordered width=75% print](/images/003_SwiftFile.png)
-![bordered width=95% screen](/images/003_SwiftFile.png)
+![bordered width=75% print](images/003_SwiftFile.png)
+![bordered width=95% screen](images/003_SwiftFile.png)
  
 Enter **GameOverScene.swift** for **Save As**, make sure the **ZombieConga** target is checked and click **Create**.
 
@@ -201,7 +201,7 @@ Build and run, and either win or lose the game. Feel free to cheat and change th
 
 Whether you win or lose, when you do, you’ll see the scene transition to a new blank scene:
 
-![iphone-landscape bordered](/images/004_BlankScene.png)
+![iphone-landscape bordered](images/004_BlankScene.png)
  
 That’s really all there is to scene transitions! Now that you have a new scene, you can do whatever you like in it, just as you did in `GameScene`.
 
@@ -289,7 +289,7 @@ let gameOverScene = GameOverScene(size: size, won: true)
 
 Build and run, and play until you win the game. When you do, you’ll see the win scene, which will then flip back to a new game after a few seconds:
 
-![iphone-landscape bordered](/images/005_YouWin.png)
+![iphone-landscape bordered](images/005_YouWin.png)
  
 Now that your game is close to done, it’s a good time to turn off the debug drawing for the playable rectangle. Comment out this line in `didMoveToView()`:
 
