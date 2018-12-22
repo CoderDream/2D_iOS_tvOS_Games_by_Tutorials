@@ -32,6 +32,8 @@ class GameScene: SKScene {
     // 提前创建声音动作，避免声音暂停
     let catCollisionSound : SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
     let enemyCollisionSound : SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
+    // 僵尸是否处于受保护的状态
+    var invincible = false
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -274,7 +276,9 @@ class GameScene: SKScene {
         // 将其垂直居中地放在屏幕上，刚好在视图之外的右边
         //enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
         // 3.7 定期生成
-        enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: CGFloat.random(min: playableRect.minY + enemy.size.height / 2, max: playableRect.maxY - enemy.size.height / 2))
+        enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: CGFloat.random(
+            min: playableRect.minY + enemy.size.height / 2,
+            max: playableRect.maxY - enemy.size.height / 2))
         addChild(enemy)
         
         // 沿着 x 轴向左移动，2秒钟之内移到刚好在屏幕的左边之外
@@ -367,6 +371,23 @@ class GameScene: SKScene {
         // 3.16 动作声音
         // run(SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false))        
         run(enemyCollisionSound)
+        // 定制闪烁动作
+        invincible = true
+        let blinkTimes = 10.0
+        let duration = 3.0
+        // 如果僵尸和一个猫女士碰撞，不要从场景中删除猫女士。相反，把僵尸设置为受保护的状态。
+        // 接下来，运行一个连续动作，首先让僵尸在3秒钟之内闪烁10次。
+        let blinkAction = SKAction.customAction(withDuration: duration) { node, elapsedTime in
+            let slice = duration / blinkTimes
+            let remainder =  Double(elapsedTime).truncatingRemainder(dividingBy: slice)
+            node.isHidden = remainder > slice / 2
+        }
+        // 把僵尸的 hidden 设置为 false，以确保不管怎样它都是可见的，并且不再受保护
+        let setHidden = SKAction.run {
+            self.zombie.isHidden = false
+            self.invincible = false
+        }
+        zombie.run(SKAction.sequence([blinkAction, setHidden]))
     }
     
     func checkCollisions() {
