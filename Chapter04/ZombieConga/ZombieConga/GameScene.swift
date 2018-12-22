@@ -37,6 +37,11 @@ class GameScene: SKScene {
     // 3.18 挑战3：康茄舞队
     // 小猫每秒钟的移动点数
     let catMovePointsPerSec : CGFloat = 480.0
+    // 4.1 获胜或失败的条件
+    // 僵尸的命的数目
+    var lives = 5
+    // 游戏是否结束
+    var gameOver = false
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -142,6 +147,11 @@ class GameScene: SKScene {
         //checkCollisions()
         // 3.18 挑战3：康茄舞队
         moveTrain()
+        // 4.1 获胜或失败的条件
+        if lives <= 0 && !gameOver {
+            gameOver = true
+            print("You lost!")
+        }
     }
     
     override func didEvaluateActions() {
@@ -391,6 +401,9 @@ class GameScene: SKScene {
         // 3.16 动作声音
         // run(SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false))        
         run(enemyCollisionSound)
+        // 4.1 获胜或失败的条件
+        lostCats()
+        lives -= 1
         // 定制闪烁动作
         invincible = true
         let blinkTimes = 10.0
@@ -438,10 +451,15 @@ class GameScene: SKScene {
     
     // 创建康茄舞队
     func moveTrain() {
+        // 4.1 获胜或失败的条件
+        var trainCount = 0
+        
         var targetPosition = zombie.position
         
         enumerateChildNodes(withName: "train") {
             node, _ in
+            // 4.1 获胜或失败的条件
+            trainCount += 1
             if !node.hasActions() {
                 let actionDuration = 0.3
                 // 计算小猫的当前位置和目标位置之间的偏移量
@@ -458,59 +476,49 @@ class GameScene: SKScene {
             }
             targetPosition = node.position
         }
+        
+        // 4.1 获胜或失败的条件
+        if trainCount >= 15 && !gameOver {
+            gameOver = true
+            print("You win!")
+        }
     }
     
-//    private var label : SKLabelNode?
-//    private var spinnyNode : SKShapeNode?
-//
-//    override func didMove(to view: SKView) {
-//
-//        // Get label node from scene and store it for use later
-//        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-//        if let label = self.label {
-//            label.alpha = 0.0
-//            label.run(SKAction.fadeIn(withDuration: 2.0))
-//        }
-//
-//        // Create shape node to use during mouse interaction
-//        let w = (self.size.width + self.size.height) * 0.05
-//        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-//
-//        if let spinnyNode = self.spinnyNode {
-//            spinnyNode.lineWidth = 2.5
-//
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                              SKAction.fadeOut(withDuration: 0.5),
-//                                              SKAction.removeFromParent()]))
-//        }
-//    }
-//
-//
-//    func touchDown(atPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.green
-//            self.addChild(n)
-//        }
-//    }
-//
-//    func touchMoved(toPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.blue
-//            self.addChild(n)
-//        }
-//    }
-//
-//    func touchUp(atPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.red
-//            self.addChild(n)
-//        }
-//    }
-
+    // 减少小猫
+    func lostCats() {
+        // 1 设置一个变量来记录到目前为止从康茄舞队中删除的小猫的数目，然后遍历康茄舞队
+        var lostCount = 0
+        enumerateChildNodes(withName: "train") {
+            (node, stop) in
+            // 2 return CGPoint 根据小猫的当前位置求得一个随机偏移量
+            var randomSpot = node.position
+            randomSpot.x += CGFloat.random(min: -100, max: 100)
+            randomSpot.y += CGFloat.random(min: -100, max: 100)
+            // 3 运行一个动画，让小猫朝着一个随机的位置移动，一路上旋转并且缩放到0.最后，该动画将小猫从场景中删除。
+            // 这里还将小猫的名字设置为一个空的字符串，以便不再将其看作是一只正常的猫或者是康茄舞队中的一只猫。
+            node.name = ""
+            node.run(
+                SKAction.sequence([
+                        SKAction.group([
+                            SKAction.rotate(byAngle: π * 4, duration: 1.0),
+                            SKAction.move(to: randomSpot, duration: 1.0),
+                            SKAction.scale(to: 0, duration: 1.0)
+                            ]),
+                        SKAction.removeFromParent()
+                    ]))
+            // 4 更新小猫的数量，一旦删除>=2只小猫，停止遍历
+            lostCount += 1
+            if lostCount >= 2 {
+                // Value of type 'UnsafeMutablePointer<ObjCBool>' has no member 'memory'
+                //stop.memory = true
+                //stop
+                //break
+                stop.initialize(to: true)
+                print("stop.initialize(to:)")
+            }
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return
@@ -528,15 +536,5 @@ class GameScene: SKScene {
         let touchLocation = touch.location(in: self)
         sceneTouched(touchLocaction: touchLocation)
     }
-
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-//    }
-//
-//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-//    }
-//
-    
 
 }
