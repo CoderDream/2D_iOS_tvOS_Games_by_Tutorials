@@ -34,6 +34,9 @@ class GameScene: SKScene {
     let enemyCollisionSound : SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
     // 僵尸是否处于受保护的状态
     var invincible = false
+    // 3.18 挑战3：康茄舞队
+    // 小猫每秒钟的移动点数
+    let catMovePointsPerSec : CGFloat = 480.0
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -81,6 +84,11 @@ class GameScene: SKScene {
         background.zPosition = -1
         
         // zombie.size = CGSize(width: 314, height: 204)
+        // 定位精灵
+        zombie.position = CGPoint(x: 400, y: 400)
+        // 3.18 挑战3：康茄舞队
+        // 把僵尸的zPosition设置为100，这会让僵尸出现在其他精灵之上。较大的z值会跑到屏幕之外，较小的值则会“陷入屏幕之中”，默认的z值为0
+        zombie.zPosition = 100
         // 把精灵加到场景
         addChild(zombie)
         // 3.9 动画动作
@@ -91,8 +99,6 @@ class GameScene: SKScene {
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnEnemy), SKAction.wait(forDuration: 2.0)])))
         // 3.11 缩放动画，生成小猫
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnCat), SKAction.wait(forDuration: 1.0)])))
-        // 定位精灵
-        zombie.position = CGPoint(x: 400, y: 400)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -134,6 +140,8 @@ class GameScene: SKScene {
         boundsCheckZombie()
         // 3.14 碰撞检测
         //checkCollisions()
+        // 3.18 挑战3：康茄舞队
+        moveTrain()
     }
     
     override func didEvaluateActions() {
@@ -360,7 +368,19 @@ class GameScene: SKScene {
     }
     
     func zombieHitCat(cat: SKSpriteNode) {
-        cat.removeFromParent()
+        // cat.removeFromParent()
+        // 3.18 挑战3：康茄舞队
+        // 1. 把小猫的名字设置为 train
+        cat.name = "train"
+        // 2. 停止当前的小猫上运行的所有动作
+        cat.removeAllActions()
+        // 3. 将小猫的缩放级别设置为1，将其旋转设置为0
+        cat.setScale(1.0)
+        cat.zPosition = 0
+        // 4. 小猫0.2秒变绿
+        let turnGreen = SKAction.colorize(with: SKColor.green, colorBlendFactor: 1.0, duration: 0.2)
+        cat.run(turnGreen)
+        
         // 3.16 动作声音
         // run(SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false))
         run(catCollisionSound)
@@ -413,6 +433,30 @@ class GameScene: SKScene {
         
         for enemy in hitEnemies {
             zombieHitEnemy(enemy: enemy)
+        }
+    }
+    
+    // 创建康茄舞队
+    func moveTrain() {
+        var targetPosition = zombie.position
+        
+        enumerateChildNodes(withName: "train") {
+            node, _ in
+            if !node.hasActions() {
+                let actionDuration = 0.3
+                // 计算小猫的当前位置和目标位置之间的偏移量
+                let offset = targetPosition - node.position
+                // 计算出x指向偏移方向的一个单位向量
+                let direction = offset.normalized()
+                // 得到指向偏移的方向的一个向量，其长度为小猫每秒钟移动的点数
+                let amountToMovePerSec = direction * self.catMovePointsPerSec
+                // 小猫在接下来的actionDuration秒内应该移动的偏移量。（需要强制转换成CGFloat）
+                let amountToMove = amountToMovePerSec * CGFloat(actionDuration)
+                // 根据amountToMove把小猫移动一个相对的量
+                let moveAction = SKAction.moveBy(x: amountToMove.x, y: amountToMove.y, duration: actionDuration)
+                node.run(moveAction)
+            }
+            targetPosition = node.position
         }
     }
     
