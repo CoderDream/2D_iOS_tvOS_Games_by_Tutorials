@@ -151,6 +151,14 @@ class GameScene: SKScene {
         if lives <= 0 && !gameOver {
             gameOver = true
             print("You lost!")
+            // 4.3 转换到一个场景
+            // 1
+            let gameOverScene = GameOverScene(size: size)
+            gameOverScene.scaleMode = scaleMode
+            // 2
+            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+            // 3
+            view?.presentScene(gameOverScene, transition: reveal)
         }
     }
     
@@ -481,6 +489,14 @@ class GameScene: SKScene {
         if trainCount >= 15 && !gameOver {
             gameOver = true
             print("You win!")
+            // 4.3 转换到一个场景
+            // 1
+            let gameOverScene = GameOverScene(size: size)
+            gameOverScene.scaleMode = scaleMode
+            // 2
+            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+            // 3
+            view?.presentScene(gameOverScene, transition: reveal)
         }
     }
     
