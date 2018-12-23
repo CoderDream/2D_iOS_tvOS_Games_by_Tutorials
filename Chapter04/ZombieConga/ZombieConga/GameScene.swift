@@ -68,6 +68,8 @@ class GameScene: SKScene {
     
     //
     override func didMove(to view: SKView) {
+        // 4.5 背景音乐
+        playBackgroundMusic(filename: "backgroundMusic.mp3")
         backgroundColor = SKColor.black
         // 创建精灵
         let background = SKSpriteNode(imageNamed: "background3")
@@ -151,6 +153,8 @@ class GameScene: SKScene {
         if lives <= 0 && !gameOver {
             gameOver = true
             print("You lost!")
+            // 4.5 背景音乐
+            backgroundMusicPlayer.stop()
             // 4.3 转换到一个场景
             // 1
             // let gameOverScene = GameOverScene(size: size)
@@ -491,6 +495,8 @@ class GameScene: SKScene {
         if trainCount >= 15 && !gameOver {
             gameOver = true
             print("You win!")
+            // 4.5 背景音乐
+            backgroundMusicPlayer.stop()
             // 4.3 转换到一个场景
             // 1
             // let gameOverScene = GameOverScene(size: size)
