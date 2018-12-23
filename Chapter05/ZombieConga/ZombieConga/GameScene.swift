@@ -169,7 +169,6 @@ class GameScene: SKScene {
         moveSprite(sprite: zombie, velocity: velocity)
         // 旋转僵尸
         rotateSprite(sprite: zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
-
         
         // 旋转僵尸
         // rotateSprite(sprite: zombie, direction: velocity)
@@ -347,9 +346,15 @@ class GameScene: SKScene {
         // 将其垂直居中地放在屏幕上，刚好在视图之外的右边
         //enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
         // 3.7 定期生成
-        enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: CGFloat.random(
-            min: playableRect.minY + enemy.size.height / 2,
-            max: playableRect.maxY - enemy.size.height / 2))
+//        enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: CGFloat.random(
+//            min: playableRect.minY + enemy.size.height / 2,
+//            max: playableRect.maxY - enemy.size.height / 2))
+        // 5.5 挑战1：修改猫女士
+        enemy.position = CGPoint(x: cameraRect.maxX + enemy.size.width / 2, y: CGFloat.random(
+            min: cameraRect.minY + enemy.size.height / 2,
+            max: cameraRect.maxY - enemy.size.height / 2))
+        enemy.zPosition = 50
+        
         addChild(enemy)
         
         // 沿着 x 轴向左移动，2秒钟之内移到刚好在屏幕的左边之外
@@ -382,7 +387,8 @@ class GameScene: SKScene {
 //        // 3.6 重复动作
 //        let repeatAction = SKAction.repeatForever(sequence)
 //        enemy.run(repeatAction)
-        let actionMove = SKAction.moveTo(x: -enemy.size.width / 2, duration: 2.0)
+        // duration越小，猫女士的速度越快
+        let actionMove = SKAction.moveTo(x: -enemy.size.width / 2, duration: 4.0)
         enemy.run(actionMove)
         // 3.8 从父节点删除动作
         let actionRemove = SKAction.removeFromParent()
@@ -447,7 +453,7 @@ class GameScene: SKScene {
         cat.removeAllActions()
         // 3. 将小猫的缩放级别设置为1，将其旋转设置为0
         cat.setScale(1.0)
-        cat.zPosition = 0
+        // cat.zPosition = 0
         // 4. 小猫0.2秒变绿
         let turnGreen = SKAction.colorize(with: SKColor.green, colorBlendFactor: 1.0, duration: 0.2)
         cat.run(turnGreen)
