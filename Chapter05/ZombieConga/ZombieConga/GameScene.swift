@@ -632,6 +632,9 @@ class GameScene: SKScene {
         enumerateChildNodes(withName: "background") {
             node, _ in
             let background = node as! SKSpriteNode
+            // 检查背景的右边是否小于当前可见区域的左边，即背景是否离屏了
+            // 如果一部分离屏了，通过吧背景的宽度加倍，从而直接把背景节点向右移动。
+            // 由于有两个背景节点，这会将第一个背景紧挨着第二个背景的右边放置。
             if background.position.x + background.size.width < self.cameraRect.origin.x {
                 background.position = CGPoint(
                     x: background.position.x + background.size.width * 2,
