@@ -95,11 +95,20 @@ class GameScene: SKScene {
 //        // 节点和z位置
 //        background.zPosition = -1
         // 5.2 滚动的背景
-        let background = backgroundNode()
-        background.anchorPoint = CGPoint.zero
-        background.position = CGPoint.zero
-        background.name = "backgroud"
-        addChild(background)
+//        let background = backgroundNode()
+//        background.anchorPoint = CGPoint.zero
+//        background.position = CGPoint.zero
+//        background.name = "backgroud"
+//        addChild(background)
+        // 5.3 不断滚动的背景
+        // 将两幅图像都从右向左地滚动，只要图像跑到屏幕w之外（离屏了），就将其重新定位到右边
+        for i in 0 ... 1 {
+            let background = backgroundNode()
+            background.anchorPoint = CGPoint.zero
+            background.position = CGPoint(x: CGFloat(i) * background.size.width, y: 0)
+            background.name = "backgroud"
+            addChild(background)
+        }
         
         // zombie.size = CGSize(width: 314, height: 204)
         // 定位精灵
@@ -610,14 +619,34 @@ class GameScene: SKScene {
     // 移动背景
     func moveCamera() {
         let backgroundVelocity = CGPoint(x: cameraMovePointsPerSec, y: 0)
-        print("backgroundVelocity \(backgroundVelocity)")
-        print("dt \(dt)")
+        //print("backgroundVelocity \(backgroundVelocity)")
+        //print("dt \(dt)")
         let  amountToMove = backgroundVelocity * CGFloat(dt)
-        print("amountToMove \(amountToMove)")
+        //print("amountToMove \(amountToMove)")
         
-        print("cameraNode.position old: \(cameraNode.position)")
+        //print("cameraNode.position old: \(cameraNode.position)")
         cameraNode.position += amountToMove
-        print("cameraNode.position new: \(cameraNode.position)")
+        // print("cameraNode.position new: \(cameraNode.position)")
+        
+        // 5.3 不断滚动的背景
+        enumerateChildNodes(withName: "background") {
+            node, _ in
+            let background = node as! SKSpriteNode
+            if background.position.x + background.size.width < self.cameraRect.origin.x {
+                background.position = CGPoint(
+                    x: background.position.x + background.size.width * 2,
+                    y: background.position.y)
+            }
+        }
+    }
+    
+    // 计算当前的“可见游戏区域”
+    var cameraRect : CGRect {
+        return CGRect(
+            x: getCameraPosition().x - size.width / 2 + (size.width - playableRect.width) / 2,
+            y: getCameraPosition().y  - size.height / 2 + (size.height - playableRect.height) / 2,
+            width: playableRect.width,
+            height: playableRect.height)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
