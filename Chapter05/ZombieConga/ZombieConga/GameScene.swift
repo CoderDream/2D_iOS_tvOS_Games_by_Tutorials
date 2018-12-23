@@ -145,25 +145,31 @@ class GameScene: SKScene {
         lastUpdateTime = currentTime
         // print("\(dt * 1000) milliseconds since last update")
         
-        if let lastTouchLocation = lastTouchLocation {
-            
-            // print("lastTouchLocation \(lastTouchLocation) ")
-            let diff = lastTouchLocation - zombie.position
-            
-            // print("diff  \(diff) ")
-            // 如果这个距离小于或等于僵尸将要在当前帧中移动的距离，那么就把僵尸的位置设置为最近一次触摸的位置，并将其速度设置为0
-            if diff.length() <= zombieMovePointsPerSec * CGFloat(dt) {
-                zombie.position = lastTouchLocation
-                velocity = CGPoint.zero
-                // 3.10 停止动作
-                stopZombieAnimation()
-            } else {
-                // 移动精灵
-                moveSprite(sprite: zombie, velocity: velocity)
-                // 旋转僵尸
-                rotateSprite(sprite: zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
-            }
-        }
+//        if let lastTouchLocation = lastTouchLocation {
+//
+//            // print("lastTouchLocation \(lastTouchLocation) ")
+//            let diff = lastTouchLocation - zombie.position
+//
+//            // print("diff  \(diff) ")
+//            // 如果这个距离小于或等于僵尸将要在当前帧中移动的距离，那么就把僵尸的位置设置为最近一次触摸的位置，并将其速度设置为0
+//            if diff.length() <= zombieMovePointsPerSec * CGFloat(dt) {
+//                zombie.position = lastTouchLocation
+//                velocity = CGPoint.zero
+//                // 3.10 停止动作
+//                stopZombieAnimation()
+//            } else {
+//                // 移动精灵
+//                moveSprite(sprite: zombie, velocity: velocity)
+//                // 旋转僵尸
+//                rotateSprite(sprite: zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
+//            }
+//        }
+        // 5.4 修改游戏配置
+        // 移动精灵
+        moveSprite(sprite: zombie, velocity: velocity)
+        // 旋转僵尸
+        rotateSprite(sprite: zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
+
         
         // 旋转僵尸
         // rotateSprite(sprite: zombie, direction: velocity)
@@ -242,13 +248,17 @@ class GameScene: SKScene {
     
     // 边界检测
     func boundsCheckZombie() {
-        // 左下角
-        //let bottomLeft = CGPoint.zero
-        let bottomLeft = CGPoint(x: 0, y: playableRect.minY)
-        
-        // 右上角
-        //let topRight = CGPoint(x: size.width, y: size.height)
-        let topRight = CGPoint(x: size.width, y: playableRect.maxY)
+//        // 左下角
+//        //let bottomLeft = CGPoint.zero
+//        let bottomLeft = CGPoint(x: 0, y: playableRect.minY)
+//
+//        // 右上角
+//        //let topRight = CGPoint(x: size.width, y: size.height)
+//        let topRight = CGPoint(x: size.width, y: playableRect.maxY)
+        // 5.4 修改游戏配置
+        // 获取可见区域的坐标
+        let bottomLeft = CGPoint(x: cameraRect.minX, y: cameraRect.minY)
+        let topRight = CGPoint(x: cameraRect.maxX, y: cameraRect.maxY)
         
         //print(bottomLeft)
         //print(bottomLeft2)
@@ -385,11 +395,19 @@ class GameScene: SKScene {
         let cat = SKSpriteNode(imageNamed: "cat")
         // 为节点设置名称
         cat.name = "cat"
+//        cat.position = CGPoint(
+//            x: CGFloat.random(min: playableRect.minX,
+//                              max: playableRect.maxX),
+//            y: CGFloat.random(min: playableRect.minY,
+//                              max: playableRect.maxY))
+        // 5.4 修改游戏设置
         cat.position = CGPoint(
-            x: CGFloat.random(min: playableRect.minX,
-                              max: playableRect.maxX),
-            y: CGFloat.random(min: playableRect.minY,
-                              max: playableRect.maxY))
+            x: CGFloat.random(min: cameraRect.minX,
+                              max: cameraRect.maxX),
+            y: CGFloat.random(min: cameraRect.minY,
+                              max: cameraRect.maxY))
+        cat.zPosition = 50
+        
         cat.setScale(0)
         addChild(cat)
         // 2 创建一个动作，调用scale(to:duration)来把小猫放大到正常大小，这个动作不是反向的，所以再创建一个类似的动作，将小猫缩放级别变回到0
