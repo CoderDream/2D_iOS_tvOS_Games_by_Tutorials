@@ -42,6 +42,8 @@ class GameScene: SKScene {
     var lives = 5
     // 游戏是否结束
     var gameOver = false
+    // 5.1 灯光、相机，开始
+    let cameraNode = SKCameraNode()
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -106,6 +108,10 @@ class GameScene: SKScene {
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnEnemy), SKAction.wait(forDuration: 2.0)])))
         // 3.11 缩放动画，生成小猫
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnCat), SKAction.wait(forDuration: 1.0)])))
+        // 5.1 灯光、相机，开始
+        addChild(cameraNode)
+        camera = cameraNode
+        cameraNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -166,6 +172,9 @@ class GameScene: SKScene {
             // 3
             view?.presentScene(gameOverScene, transition: reveal)
         }
+        // 5.1 灯光、相机，开始
+        //cameraNode.position = zombie.position
+        setCameraPosition(position: CGPoint(x: size.width / 2, y: size.height / 2))
     }
     
     override func didEvaluateActions() {
@@ -543,6 +552,24 @@ class GameScene: SKScene {
                 print("stop.initialize(to:)")
             }
         }
+    }
+    
+    func overlapAmount() -> CGFloat {
+        guard let view = self.view else {
+            return 0
+        }
+        let scale = view.bounds.size.width / self.size.width
+        let scaleHeight = self.size.height * scale
+        let scaleOverlap = scaleHeight - view.bounds.size.height
+        return scaleOverlap / scale
+    }
+    
+    func getCameraPosition() -> CGPoint {
+        return CGPoint(x: cameraNode.position.x, y: cameraNode.position.y + overlapAmount() / 2)
+    }
+    
+    func setCameraPosition(position : CGPoint) {
+        cameraNode.position = CGPoint(x: position.x, y: position.y - overlapAmount() / 2)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
