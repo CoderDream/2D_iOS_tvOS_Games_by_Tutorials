@@ -15,7 +15,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let scene = GameScene.init(size: CGSize(width: 1920, height: 1080))
+        // let scene = GameScene.init(size: CGSize(width: 1920, height: 1080))
+        let scene = MainMenuScene.init(size: CGSize(width: 1920, height: 1080))
         let skView = self.view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
