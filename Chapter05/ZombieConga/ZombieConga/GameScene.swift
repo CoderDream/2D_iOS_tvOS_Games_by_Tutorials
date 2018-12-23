@@ -44,6 +44,9 @@ class GameScene: SKScene {
     var gameOver = false
     // 5.1 灯光、相机，开始
     let cameraNode = SKCameraNode()
+    // 5.2 滚动的背景
+    // 相机的滚动速度
+    let cameraMovePointsPerSec : CGFloat = 200.0
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -73,24 +76,30 @@ class GameScene: SKScene {
         // 4.5 背景音乐
         playBackgroundMusic(filename: "backgroundMusic.mp3")
         backgroundColor = SKColor.black
-        // 创建精灵
-        let background = SKSpriteNode(imageNamed: "background3")
-        // 把精灵加到场景
+//        // 创建精灵
+//        let background = SKSpriteNode(imageNamed: "background3")
+//        // 把精灵加到场景
+//        addChild(background)
+//        // 定位精灵
+//        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+//        // 设置精灵的锚点
+//        //background.anchorPoint = CGPoint.zero
+//        //background.position = CGPoint.zero
+//
+//        background.anchorPoint =  CGPoint(x: 0.5, y: 0.5) // default
+//        // 旋转精灵
+//        // background.zRotation = CGFloat(Double.pi) / 8
+//        // 获取精灵的大小
+//        // let mySize = background.size
+//        // print("Size: \(mySize)")
+//        // 节点和z位置
+//        background.zPosition = -1
+        // 5.2 滚动的背景
+        let background = backgroundNode()
+        background.anchorPoint = CGPoint.zero
+        background.position = CGPoint.zero
+        background.name = "backgroud"
         addChild(background)
-        // 定位精灵
-        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        // 设置精灵的锚点
-        //background.anchorPoint = CGPoint.zero
-        //background.position = CGPoint.zero
-        
-        background.anchorPoint =  CGPoint(x: 0.5, y: 0.5) // default
-        // 旋转精灵
-        // background.zRotation = CGFloat(Double.pi) / 8
-        // 获取精灵的大小
-        // let mySize = background.size
-        // print("Size: \(mySize)")
-        // 节点和z位置
-        background.zPosition = -1
         
         // zombie.size = CGSize(width: 314, height: 204)
         // 定位精灵
@@ -155,6 +164,8 @@ class GameScene: SKScene {
         //checkCollisions()
         // 3.18 挑战3：康茄舞队
         moveTrain()
+        // 5.2 滚动的背景
+        moveCamera()
         // 4.1 获胜或失败的条件
         if lives <= 0 && !gameOver {
             gameOver = true
@@ -174,7 +185,7 @@ class GameScene: SKScene {
         }
         // 5.1 灯光、相机，开始
         //cameraNode.position = zombie.position
-        setCameraPosition(position: CGPoint(x: size.width / 2, y: size.height / 2))
+        // setCameraPosition(position: CGPoint(x: size.width / 2, y: size.height / 2))
     }
     
     override func didEvaluateActions() {
@@ -554,6 +565,7 @@ class GameScene: SKScene {
         }
     }
     
+    // 确保背景不离开屏幕
     func overlapAmount() -> CGFloat {
         guard let view = self.view else {
             return 0
@@ -570,6 +582,42 @@ class GameScene: SKScene {
     
     func setCameraPosition(position : CGPoint) {
         cameraNode.position = CGPoint(x: position.x, y: position.y - overlapAmount() / 2)
+    }
+    
+    // 5.2 滚动的背景
+    func backgroundNode() -> SKSpriteNode {
+        // 1
+        let backgroundNode = SKSpriteNode()
+        backgroundNode.anchorPoint = CGPoint.zero
+        backgroundNode.name = "background"
+        // 2
+        let background1 = SKSpriteNode(imageNamed: "background1")
+        background1.anchorPoint = CGPoint.zero
+        background1.position = CGPoint(x: 0, y: 0)
+        backgroundNode.addChild(background1)
+        // 3
+        let background2 = SKSpriteNode(imageNamed: "background2")
+        background2.anchorPoint = CGPoint.zero
+        background2.position = CGPoint(x: background1.size.width, y: 0)
+        backgroundNode.addChild(background2)
+        // 4
+        backgroundNode.size = CGSize(width: background1.size.width + background2.size.width, height: background1.size.height)
+        
+        print("backgroundNode.size \(backgroundNode.size)")
+        return backgroundNode
+    }
+    
+    // 移动背景
+    func moveCamera() {
+        let backgroundVelocity = CGPoint(x: cameraMovePointsPerSec, y: 0)
+        print("backgroundVelocity \(backgroundVelocity)")
+        print("dt \(dt)")
+        let  amountToMove = backgroundVelocity * CGFloat(dt)
+        print("amountToMove \(amountToMove)")
+        
+        print("cameraNode.position old: \(cameraNode.position)")
+        cameraNode.position += amountToMove
+        print("cameraNode.position new: \(cameraNode.position)")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
