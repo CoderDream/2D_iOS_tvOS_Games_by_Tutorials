@@ -153,7 +153,9 @@ class GameScene: SKScene {
             print("You lost!")
             // 4.3 转换到一个场景
             // 1
-            let gameOverScene = GameOverScene(size: size)
+            // let gameOverScene = GameOverScene(size: size)
+            // 4.4 创建一个定制的场景初始化程序
+            let gameOverScene = GameOverScene(size: size, won: false)
             gameOverScene.scaleMode = scaleMode
             // 2
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
@@ -491,7 +493,9 @@ class GameScene: SKScene {
             print("You win!")
             // 4.3 转换到一个场景
             // 1
-            let gameOverScene = GameOverScene(size: size)
+            // let gameOverScene = GameOverScene(size: size)
+            // 4.4 创建一个定制的场景初始化程序
+            let gameOverScene = GameOverScene(size: size, won: true)
             gameOverScene.scaleMode = scaleMode
             // 2
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
