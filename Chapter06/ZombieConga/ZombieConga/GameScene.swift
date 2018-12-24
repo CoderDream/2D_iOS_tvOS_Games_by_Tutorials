@@ -47,7 +47,9 @@ class GameScene: SKScene {
     // 5.2 滚动的背景
     // 相机的滚动速度
     let cameraMovePointsPerSec : CGFloat = 200.0
-    
+    // 6.2 给 Zombie Conga 添加一个标签
+    // 玩家生命数标签
+    let livesLabel = SKLabelNode(fontNamed: "Chalkduster")
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
         let playableHeight = size.width / maxAspectRatio                    // 2
@@ -130,6 +132,16 @@ class GameScene: SKScene {
         addChild(cameraNode)
         camera = cameraNode
         cameraNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        // 6.2 给 Zombie Conga 添加一个标签        
+        livesLabel.text = "Lives: X"
+        livesLabel.fontColor = SKColor.black
+        livesLabel.fontSize = 100
+        livesLabel.zPosition = 100
+        livesLabel.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        //addChild(livesLabel)
+        // 不管相机如何移动，标签始终保持在相同的位置。
+        livesLabel.position = CGPoint.zero
+        cameraNode.addChild(livesLabel)
     }
     
     override func update(_ currentTime: TimeInterval) {
