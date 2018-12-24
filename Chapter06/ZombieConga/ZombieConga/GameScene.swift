@@ -132,15 +132,21 @@ class GameScene: SKScene {
         addChild(cameraNode)
         camera = cameraNode
         cameraNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        // 6.2 给 Zombie Conga 添加一个标签        
+        // 6.2 给 Zombie Conga 添加一个标签
         livesLabel.text = "Lives: X"
         livesLabel.fontColor = SKColor.black
         livesLabel.fontSize = 100
         livesLabel.zPosition = 100
-        livesLabel.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        //livesLabel.position = CGPoint(x: size.width / 2, y: size.height / 2)
         //addChild(livesLabel)
         // 不管相机如何移动，标签始终保持在相同的位置。
-        livesLabel.position = CGPoint.zero
+        //livesLabel.position = CGPoint.zero
+        // 6.3 对齐方式
+        livesLabel.horizontalAlignmentMode = .left
+        livesLabel.verticalAlignmentMode = .bottom
+        livesLabel.position = CGPoint(
+            x: -playableRect.size.width / 2 + CGFloat(20),
+            y: -playableRect.size.height / 2 + CGFloat(20) + overlapAmount() / 2)
         cameraNode.addChild(livesLabel)
     }
     
