@@ -44,4 +44,40 @@ class GameScene: SKScene {
         }
     }
     
+    // 7.3 按下按钮
+    // 1 开始按钮按下
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        for press in presses {
+            // 2 根据按钮更新标签
+            switch press.type {
+            case .upArrow:
+                pressLabel.text = "Up arrow"
+            case .downArrow:
+                pressLabel.text = "Down arrow"
+            case .leftArrow:
+                pressLabel.text = "Left arrow"
+            case .rightArrow:
+                pressLabel.text = "Right arrow"
+            case .select:
+                pressLabel.text = "Select"
+            case .menu:
+                pressLabel.text = "Menu"
+            case .playPause:
+                pressLabel.text = "Play/Pause"
+            }
+        }
+    }
+    
+    // 停止按钮按下
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        // 3 停止按钮按下后清除标签
+        self.removeAllActions()
+        run(SKAction.sequence([
+                SKAction.wait(forDuration: 1.0),
+                SKAction.run() {
+                    self.pressLabel.text = ""
+            }
+            ]))
+    }
+    
 }
