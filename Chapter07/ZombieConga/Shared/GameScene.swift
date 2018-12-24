@@ -54,6 +54,11 @@ class GameScene: SKScene {
     let livesLabel = SKLabelNode(fontNamed: "Glimstick")
     // 6.6 挑战 挑战1：小猫计数
     let catsLabel = SKLabelNode(fontNamed: "Glimstick")
+    // 7.5 修正触摸处理
+    // 添加红色的触摸方框
+    let touchBox = SKSpriteNode(color: UIColor.red, size: CGSize(width: 100, height: 100))
+    //
+    var priorTouch : CGPoint = CGPoint.zero
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -166,6 +171,12 @@ class GameScene: SKScene {
             x: playableRect.size.width / 2 - CGFloat(20),
             y: -playableRect.size.height / 2 + CGFloat(20) + overlapAmount() / 2)
         cameraNode.addChild(catsLabel)
+        
+        // 7.5 修正触摸处理
+        touchBox.zPosition = 100
+        addChild(touchBox)
+        // 隐藏红色方框
+        touchBox.isHidden = true
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -723,6 +734,14 @@ class GameScene: SKScene {
         
         let touchLocation = touch.location(in: self)
         sceneTouched(touchLocaction: touchLocation)
+        
+        // 7.5 修正触摸处理
+        touchBox.position = touchLocation
+        #if os (tvOS)
+            priorTouch = touchLocation
+        #else
+            sceneTouched(touchLocaction: touchLocation)
+        #endif
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -731,7 +750,27 @@ class GameScene: SKScene {
         }
         
         let touchLocation = touch.location(in: self)
-        sceneTouched(touchLocaction: touchLocation)
+        
+        
+//        sceneTouched(touchLocaction: touchLocation)
+//
+//        // 7.5 修正触摸处理
+//        touchBox.position = touchLocation
+        #if os (tvOS)
+            // 1
+            let offset = touchLocation - priorTouch
+            let direction = offset.normalized()
+            velocity = direction * zombieMovePointsPerSec
+        
+            // 2
+            priorTouch = (priorTouch * 0.75) + (touchLocation * 0.25)
+        
+            // 3
+            touchBox.position = zombie.position + (direction * 200)
+        #else
+            touchBox.position = touchLocation
+            sceneTouched(touchLocaction: touchLocation)
+        #endif
     }
 
 }
