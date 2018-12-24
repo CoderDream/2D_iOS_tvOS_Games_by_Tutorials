@@ -582,6 +582,8 @@ class GameScene: SKScene {
             // 3
             view?.presentScene(gameOverScene, transition: reveal)
         }
+        // 6.5 更新标签文本
+        livesLabel.text = "Lives: \(lives)"
     }
     
     // 减少小猫
