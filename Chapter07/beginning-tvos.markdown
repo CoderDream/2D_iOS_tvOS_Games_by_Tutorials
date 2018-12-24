@@ -11,14 +11,12 @@ At this point, Zombie Conga is complete as a Universal app for iPhone and iPad.
 "But wait a minute", you may be thinking. "This book is called *2D iOS & tvOS Games by Tutorials*—where in the heck is the tvOS part?!"
 
 ![width=65% print](images/001_Zombies.png)
-![width=65% screen](images/001_Zombies.png)
 
 Never fear, that's what this chapter is all about.
 
 In this chapter, you'll port Zombie Conga to the Apple TV. By the time you're done, your game will be running on the big screen!
 
 ![bordered width=75% print](images/002_BigScreen.png)
-![bordered width=75% screen](images/002_BigScreen.png)
 
 Believe it or not, porting your game is easier than it seems. Sprite Kit works the same on tvOS as it does on iOS, so getting the game to work on tvOS requires only a few simple steps. 
 
@@ -133,12 +131,10 @@ Take a look at what you're doing with this code, section by section:
 Build and run on the Apple TV simulator, and you'll see the following:
 
 ![bordered width=70% print](images/005_MoveYourFinger.png)
-![bordered width=80% screen](images/005_MoveYourFinger.png)
 
 Next, bring up the Apple TV remote by clicking **Hardware\Show Apple TV Remote** from the simulator's main menu. Click the remote to focus it, then move your mouse over the touchpad area, hold down **Option** and **drag**. You'll start to see a red box moving around the screen, representing the coordinates you're receiving in your touch handler:
 
 ![bordered width=70% print](images/006_MovingRemote.png)
-![bordered width=90% screen](images/006_MovingRemote.png)
 
 > **Note**: If you don't see the red box appear and move around, be sure to hold down Option as you drag your mouse inside the Apple TV remote.
 
@@ -254,11 +250,9 @@ Just as you did before, select the **tvOS\Application\Game** template and click 
 Enter **ZombieCongaTV** for **Product Name**, select **Swift** for **Language** and select **Sprite Kit** for **Game Technology**. Then, click **Finish**:
 
 ![bordered width=60% print](images/011_tvOSSettings2.png)
-![bordered width=80% screen](images/011_tvOSSettings2.png)
 
 You'll see a new target appear in the list, along with a set of files that belong to that target in the project navigator:
 
-![bordered width=70% print](images/012_TwoTargets.png)
 ![bordered width=85% screen](images/012_TwoTargets.png)
 
 Your goal is to reuse the files from your ZombieConga target in your ZombieCongaTV target. To do this, right-click your ZombieConga project located in the project navigator—it's the blue one at the very top, not the yellow folder—and select **New Group**. Name the group **Shared** and drag the following files from your yellow **ZombieConga** group to Shared:
@@ -319,7 +313,6 @@ In the upper left of Xcode, switch to the **ZombieCongaTV\tvOS Simulator**:
 That's it—build and run, and enjoy Zombie Conga on the big screen!
 
 ![bordered width=70% print](images/016_ZombieCongaTV.png)
-![bordered width=80% screen](images/016_ZombieCongaTV.png)
 
 Are you wondering how the game works seamlessly with the tvOS resolution? Recall from Chapter 1 that your strategy was to make the art at the biggest possible size and aspect ratio, and downscale it for other devices using Aspect Fill. The Apple TV renders at 1920x1080, so Aspect Fill will scale a 2048x1152 viewable scene size by 0.93 to fit the 1920x1080 screen size. This is the same as the iPhone 6 Plus. :]
 
