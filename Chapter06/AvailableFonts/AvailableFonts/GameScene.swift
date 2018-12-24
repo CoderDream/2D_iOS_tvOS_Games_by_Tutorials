@@ -23,17 +23,17 @@ class GameScene: SKScene {
     }
     
     func showCurrentFamily() {
-        // 1
+        // 1 从场景中删除所有的子节点，以便能够以一个空白的场景开始。
         removeAllChildren()
         
-        // 2
+        // 2 根据每次点击递增的索引来获取当前字体族的名称
         let familyName = UIFont.familyNames[familyIdx]
         print("familyName: \(familyName)")
         
-        // 3
+        // 3 获取字体c组中的字体名称列表
         let fontNames = UIFont.fontNames(forFamilyName: familyName)
         
-        // 4
+        // 4 遍历每一种字体来创建一个标签，每个标签的文本都显示出所对应的字体的名称。
         for (idx, fontName) in fontNames.enumerated() {
             let label = SKLabelNode(fontNamed: fontName)
             label.text = fontName
