@@ -757,15 +757,16 @@ class GameScene: SKScene {
 //        // 7.5 修正触摸处理
 //        touchBox.position = touchLocation
         #if os (tvOS)
-            // 1
+            // 1 根据当前触摸和priorTouch之间的方向来设置速率
             let offset = touchLocation - priorTouch
             let direction = offset.normalized()
             velocity = direction * zombieMovePointsPerSec
         
-            // 2
+            // 2 不直接将 priorTouch 设置为 touchLocation，因为实时的手指移动会有很多的干扰。
+            // 相反，使用之前的 priorTouch 的75% 和新的 touchLocation 的 25% 的一个混合。
             priorTouch = (priorTouch * 0.75) + (touchLocation * 0.25)
         
-            // 3
+            // 3 更新touchBox，让当前移动的方向可见
             touchBox.position = zombie.position + (direction * 200)
         #else
             touchBox.position = touchLocation

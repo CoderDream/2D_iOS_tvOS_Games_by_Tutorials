@@ -35,6 +35,7 @@
 		3F432C6F21D11F1F00B5B783 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F445B6A21CBF20800B1CA19 /* MyUtils.swift */; };
 		3F432C7021D11F1F00B5B783 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F28994C21CF3B060048EE77 /* MainMenuScene.swift */; };
 		3F445B6B21CBF20800B1CA19 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F445B6A21CBF20800B1CA19 /* MyUtils.swift */; };
+		3F7A9D0F21D13D6E00DC6671 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F7A9D0E21D13D6E00DC6671 /* Assets.xcassets */; };
 		3FAD157B21D086A2009FCD70 /* GLIMSTIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3FAD157A21D086A1009FCD70 /* GLIMSTIC.TTF */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		3F432C5D21D11D3800B5B783 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F432C6121D11D3D00B5B783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F445B6A21CBF20800B1CA19 /* MyUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
+		3F7A9D0E21D13D6E00DC6671 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../../Desktop/igt1c/07beginning-tvos/projects/final/ZombieConga/ZombieCongaTV/Assets.xcassets"; sourceTree = "<group>"; };
 		3FAD157A21D086A1009FCD70 /* GLIMSTIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GLIMSTIC.TTF; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 		3F432C5121D11D3800B5B783 /* ZombieCongaTV */ = {
 			isa = PBXGroup;
 			children = (
+				3F7A9D0E21D13D6E00DC6671 /* Assets.xcassets */,
 				3F432C5221D11D3800B5B783 /* AppDelegate.swift */,
 				3F432C5A21D11D3800B5B783 /* GameViewController.swift */,
 				3F432C5C21D11D3800B5B783 /* Main.storyboard */,
@@ -252,6 +255,7 @@
 				3F432C6621D11F1F00B5B783 /* backgroundMusic.mp3 in Resources */,
 				3F432C6821D11F1F00B5B783 /* hitCatLady.wav in Resources */,
 				3F432C6A21D11F1F00B5B783 /* win.wav in Resources */,
+				3F7A9D0F21D13D6E00DC6671 /* Assets.xcassets in Resources */,
 				3F432C6921D11F1F00B5B783 /* lose.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
