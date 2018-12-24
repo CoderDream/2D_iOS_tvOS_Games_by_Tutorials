@@ -1,4 +1,4 @@
-# Beginning tvOS
+# Chapter 7: Beginning tvOS
 ```metadata
 author: "By Ray Wenderlich"
 number: "7"
