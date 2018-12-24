@@ -52,6 +52,8 @@ class GameScene: SKScene {
     //let livesLabel = SKLabelNode(fontNamed: "Chalkduster")
     // 6.4 加载定制字体
     let livesLabel = SKLabelNode(fontNamed: "Glimstick")
+    // 6.6 挑战 挑战1：小猫计数
+    let catsLabel = SKLabelNode(fontNamed: "Glimstick")
     
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
@@ -151,6 +153,19 @@ class GameScene: SKScene {
             x: -playableRect.size.width / 2 + CGFloat(20),
             y: -playableRect.size.height / 2 + CGFloat(20) + overlapAmount() / 2)
         cameraNode.addChild(livesLabel)
+        
+        // 6.6 挑战 挑战1：小猫计数
+        catsLabel.text = "Cats: X"
+        catsLabel.fontColor = SKColor.black
+        catsLabel.fontSize = 100
+        catsLabel.zPosition = 100
+        // 6.3 对齐方式
+        catsLabel.horizontalAlignmentMode = .right
+        catsLabel.verticalAlignmentMode = .bottom
+        catsLabel.position = CGPoint(
+            x: playableRect.size.width / 2 - CGFloat(20),
+            y: -playableRect.size.height / 2 + CGFloat(20) + overlapAmount() / 2)
+        cameraNode.addChild(catsLabel)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -584,6 +599,8 @@ class GameScene: SKScene {
         }
         // 6.5 更新标签文本
         livesLabel.text = "Lives: \(lives)"
+        // 6.6 挑战 挑战1：小猫计数
+        catsLabel.text = "Cats: \(trainCount)"
     }
     
     // 减少小猫
