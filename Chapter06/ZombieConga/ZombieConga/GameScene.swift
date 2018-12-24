@@ -49,7 +49,10 @@ class GameScene: SKScene {
     let cameraMovePointsPerSec : CGFloat = 200.0
     // 6.2 给 Zombie Conga 添加一个标签
     // 玩家生命数标签
-    let livesLabel = SKLabelNode(fontNamed: "Chalkduster")
+    //let livesLabel = SKLabelNode(fontNamed: "Chalkduster")
+    // 6.4 加载定制字体
+    let livesLabel = SKLabelNode(fontNamed: "Glimstick")
+    
     override init(size : CGSize) {
         let maxAspectRatio : CGFloat = 16.0 / 9.0                           // 1
         let playableHeight = size.width / maxAspectRatio                    // 2

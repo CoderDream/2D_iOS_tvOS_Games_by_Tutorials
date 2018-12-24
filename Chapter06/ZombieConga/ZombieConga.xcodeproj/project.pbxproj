@@ -21,6 +21,7 @@
 		3F40499321C7F17600ABDA6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F40499221C7F17600ABDA6C /* Assets.xcassets */; };
 		3F40499621C7F17600ABDA6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F40499421C7F17600ABDA6C /* LaunchScreen.storyboard */; };
 		3F445B6B21CBF20800B1CA19 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F445B6A21CBF20800B1CA19 /* MyUtils.swift */; };
+		3FAD157B21D086A2009FCD70 /* GLIMSTIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3FAD157A21D086A1009FCD70 /* GLIMSTIC.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		3F40499521C7F17600ABDA6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F40499721C7F17600ABDA6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F445B6A21CBF20800B1CA19 /* MyUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
+		3FAD157A21D086A1009FCD70 /* GLIMSTIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GLIMSTIC.TTF; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				3F12DE5621CD2ED80078D25C /* Sounds */,
+				3FAD157A21D086A1009FCD70 /* GLIMSTIC.TTF */,
 				3F40498521C7F17100ABDA6C /* AppDelegate.swift */,
 				3F40498B21C7F17100ABDA6C /* GameScene.swift */,
 				3F40498D21C7F17100ABDA6C /* GameViewController.swift */,
@@ -157,6 +160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FAD157B21D086A2009FCD70 /* GLIMSTIC.TTF in Resources */,
 				3F40499121C7F17100ABDA6C /* Main.storyboard in Resources */,
 				3F12DE6021CD2ED80078D25C /* win.wav in Resources */,
 				3F12DE5D21CD2ED80078D25C /* hitCat.wav in Resources */,
