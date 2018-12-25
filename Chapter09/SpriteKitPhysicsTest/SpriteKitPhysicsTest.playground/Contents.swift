@@ -65,21 +65,21 @@ PlaygroundPage.current.liveView = sceneView
 //redRectView.backgroundColor = UIColor.red
 //scene.addChild(redRectView)
 
-//let square = SKSpriteNode(imageNamed: "square")
-//square.name = "shape"
-//square.position = CGPoint(x: scene.size.width * 0.25, y: scene.size.height * 0.50)
-//
-//let circle = SKSpriteNode(imageNamed: "circle")
-//circle.name = "shape"
-//circle.position = CGPoint(x: scene.size.width * 0.50, y: scene.size.height * 0.50)
-//
-//let triangle = SKSpriteNode(imageNamed: "triangle")
-//triangle.name = "shape"
-//triangle.position = CGPoint(x: scene.size.width * 0.75, y: scene.size.height * 0.50)
-//
-//scene.addChild(square)
-//scene.addChild(circle)
-//scene.addChild(triangle)
+let square = SKSpriteNode(imageNamed: "square")
+square.name = "shape"
+square.position = CGPoint(x: scene.size.width * 0.25, y: scene.size.height * 0.50)
+
+let circle = SKSpriteNode(imageNamed: "circle")
+circle.name = "shape"
+circle.position = CGPoint(x: scene.size.width * 0.50, y: scene.size.height * 0.50)
+
+let triangle = SKSpriteNode(imageNamed: "triangle")
+triangle.name = "shape"
+triangle.position = CGPoint(x: scene.size.width * 0.75, y: scene.size.height * 0.50)
+
+scene.addChild(square)
+scene.addChild(circle)
+scene.addChild(triangle)
 
 
 //var str = "Hello, playground"
