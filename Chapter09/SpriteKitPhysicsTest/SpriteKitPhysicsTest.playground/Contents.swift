@@ -79,9 +79,24 @@ func spawnSand() {
     sand.physicsBody!.density = 20.0
 }
 
+// 9.12 应用冲击
+func shake() {
+    scene.enumerateChildNodes(withName: "sand") {
+        node, _ in
+        node.physicsBody!.applyImpulse(CGVector(dx: random(min: 20, max: 60), dy: random(min: 20, max: 60)))
+    }
+    DispatchAfter(after: 3.0) {
+        shake()
+    }
+}
+
 // 延时2秒后恢复重力作用
 DispatchAfter(after: 2.0) {
     scene.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
     // 调用spawnSand，然后等待0.1秒钟，执行100次该序列动作
     scene.run(SKAction.repeat(SKAction.sequence([SKAction.run(spawnSand), SKAction.wait(forDuration: 0.1)]), count: 100))
+    //
+    DispatchAfter(after: 12.0) {
+        shake()
+    }
 }
