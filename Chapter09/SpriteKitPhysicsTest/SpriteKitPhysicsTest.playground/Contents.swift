@@ -54,7 +54,19 @@ trianglePath.addLine(to: CGPoint(x: -triangle.size.width / 2, y: -triangle.size.
 // 创建三角形实体
 triangle.physicsBody = SKPhysicsBody(polygonFrom: trianglePath)
 
+// 9.9 可视化实体
+// 生成沙子粒子，位置随机
+func spawnSand() {
+    let sand = SKSpriteNode(imageNamed: "sand")
+    sand.position = CGPoint(x: random(min: 0.0, max: scene.size.width), y: scene.size.height - sand.size.height)
+    sand.physicsBody = SKPhysicsBody(circleOfRadius: sand.size.width / 2)
+    sand.name = "sand"
+    scene.addChild(sand)
+}
+
 // 延时2秒后恢复重力作用
 DispatchAfter(after: 2.0) {
     scene.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+    // 调用spawnSand，然后等待0.1秒钟，执行100次该序列动作
+    scene.run(SKAction.repeat(SKAction.sequence([SKAction.run(spawnSand), SKAction.wait(forDuration: 0.1)]), count: 100))
 }
