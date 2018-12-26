@@ -9,6 +9,10 @@ sceneView.showsFPS = true
 
 // 关闭重力作用
 scene.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+
+// 9.6 边缘闭合实体
+// 当圆形碰到了屏幕的底部的时候，它会停止下来，甚至会向回反弹一点点。
+scene.physicsBody = SKPhysicsBody(edgeLoopFrom: scene.frame)
 sceneView.presentScene(scene)
 
 PlaygroundPage.current.needsIndefiniteExecution = true
@@ -33,6 +37,7 @@ scene.addChild(triangle)
 // 9.5 圆形实体
 circle.physicsBody = SKPhysicsBody(circleOfRadius: circle.size.width / 2)
 
+// 延时2秒后恢复重力作用
 DispatchAfter(after: 2.0) {
     scene.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
 }
