@@ -7,6 +7,9 @@ let sceneView = SKView(frame: CGRect(x: 0, y: 0, width: 480, height: 320))
 let scene = SKScene(size: CGSize(width: 480, height: 320))
 sceneView.showsFPS = true
 
+// 显示物体轮廓
+sceneView.showsPhysics = true
+
 // 关闭重力作用
 scene.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 
@@ -33,6 +36,13 @@ triangle.position = CGPoint(x: scene.size.width * 0.75, y: scene.size.height * 0
 scene.addChild(square)
 scene.addChild(circle)
 scene.addChild(triangle)
+
+// 9.10 复杂形状的实体
+let l = SKSpriteNode(imageNamed: "L")
+l.name = "shape"
+l.position = CGPoint(x: scene.size.width * 0.5, y: scene.size.height * 0.75)
+l.physicsBody = SKPhysicsBody(texture: l.texture!, size: l.size)
+scene.addChild(l)
 
 // 9.5 圆形实体
 circle.physicsBody = SKPhysicsBody(circleOfRadius: circle.size.width / 2)
