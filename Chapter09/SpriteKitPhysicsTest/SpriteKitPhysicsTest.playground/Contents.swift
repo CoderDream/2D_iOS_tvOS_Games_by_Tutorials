@@ -6,6 +6,9 @@ let sceneView = SKView(frame: CGRect(x: 0, y: 0, width: 480, height: 320))
 
 let scene = SKScene(size: CGSize(width: 480, height: 320))
 sceneView.showsFPS = true
+
+// 关闭重力作用
+scene.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 sceneView.presentScene(scene)
 
 PlaygroundPage.current.needsIndefiniteExecution = true
@@ -27,4 +30,9 @@ scene.addChild(square)
 scene.addChild(circle)
 scene.addChild(triangle)
 
+// 9.5 圆形实体
+circle.physicsBody = SKPhysicsBody(circleOfRadius: circle.size.width / 2)
 
+DispatchAfter(after: 2.0) {
+    scene.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+}
