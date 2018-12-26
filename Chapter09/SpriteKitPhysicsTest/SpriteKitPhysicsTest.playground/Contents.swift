@@ -72,6 +72,11 @@ func spawnSand() {
     sand.physicsBody = SKPhysicsBody(circleOfRadius: sand.size.width / 2)
     sand.name = "sand"
     scene.addChild(sand)
+    // 9.11 物理实体的属性
+    // 弹跳性：0.0（实体不会反弹）-> 1.0 （实体以碰撞开始时相同的力量弹回）。默认值为0.2
+    sand.physicsBody!.restitution = 0.9
+    // 单位体积的质量
+    sand.physicsBody!.density = 20.0
 }
 
 // 延时2秒后恢复重力作用
