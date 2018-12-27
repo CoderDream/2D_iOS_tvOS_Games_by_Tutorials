@@ -23,6 +23,8 @@
 		3F4F081121D1BD3600FDF992 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F4F080C21D1BD3600FDF992 /* win.mp3 */; };
 		3F4F081221D1BD3600FDF992 /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F4F080D21D1BD3600FDF992 /* lose.mp3 */; };
 		3F4F081321D1BD3600FDF992 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F4F080E21D1BD3600FDF992 /* backgroundMusic.mp3 */; };
+		3F9C7EC621D50C830045AA75 /* BedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C7EC521D50C830045AA75 /* BedNode.swift */; };
+		3F9C7EC821D511F10045AA75 /* CatNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C7EC721D511F10045AA75 /* CatNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		3F4F080C21D1BD3600FDF992 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		3F4F080D21D1BD3600FDF992 /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
 		3F4F080E21D1BD3600FDF992 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		3F9C7EC521D50C830045AA75 /* BedNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedNode.swift; sourceTree = "<group>"; };
+		3F9C7EC721D511F10045AA75 /* CatNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 				3F4F07FE21D1BAD000FDF992 /* Assets.xcassets */,
 				3F4F080021D1BAD000FDF992 /* LaunchScreen.storyboard */,
 				3F4F080321D1BAD000FDF992 /* Info.plist */,
+				3F9C7EC521D50C830045AA75 /* BedNode.swift */,
+				3F9C7EC721D511F10045AA75 /* CatNode.swift */,
 			);
 			path = CatNap;
 			sourceTree = "<group>";
@@ -195,6 +201,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F4F07F821D1BAC800FDF992 /* GameScene.swift in Sources */,
+				3F9C7EC821D511F10045AA75 /* CatNode.swift in Sources */,
+				3F9C7EC621D50C830045AA75 /* BedNode.swift in Sources */,
 				3F4F07FA21D1BAC800FDF992 /* GameViewController.swift in Sources */,
 				3F4F07F221D1BAC700FDF992 /* AppDelegate.swift in Sources */,
 			);

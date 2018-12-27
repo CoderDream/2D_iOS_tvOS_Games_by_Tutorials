@@ -9,6 +9,10 @@
 import SpriteKit
 import GameplayKit
 
+protocol CustomNodeEvents {
+    func didMoveToScene()
+}
+
 class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
@@ -20,6 +24,14 @@ class GameScene: SKScene {
         
         let playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: size.height - maxAspectRatioHeight * 2)
         physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
+        
+        // 10.2 定制节点类
+        enumerateChildNodes(withName: "//*", using: {
+            node, _ in
+            if let customNode = node as? CustomNodeEvents {
+                customNode.didMoveToScene()
+            }
+        })
     }
     
     func touchDown(atPoint pos : CGPoint) {
