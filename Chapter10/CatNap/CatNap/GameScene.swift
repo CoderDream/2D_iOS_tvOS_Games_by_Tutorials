@@ -14,6 +14,9 @@ protocol CustomNodeEvents {
 }
 
 class GameScene: SKScene {
+    // 10.3 将精灵连接到变量
+    var bedNode : BedNode!
+    var catNode : CatNode!
     
     override func didMove(to view: SKView) {
         // 10.1 开始
@@ -32,6 +35,14 @@ class GameScene: SKScene {
                 customNode.didMoveToScene()
             }
         })
+        
+        // 10.3 将精灵连接到变量
+        // Treating a forced downcast to 'BedNode' as optional will never produce 'nil'
+        bedNode = childNode(withName: "bed") as? BedNode
+        catNode = childNode(withName: "//cat_body") as? CatNode
+        
+        bedNode.setScale(1.5)
+        catNode.setScale(1.5)
     }
     
     func touchDown(atPoint pos : CGPoint) {
