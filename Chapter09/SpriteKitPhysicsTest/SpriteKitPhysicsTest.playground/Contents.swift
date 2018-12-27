@@ -46,6 +46,9 @@ scene.addChild(l)
 
 // 9.5 圆形实体
 circle.physicsBody = SKPhysicsBody(circleOfRadius: circle.size.width / 2)
+// 挑战2：体感实体
+// 让圆形精灵不再被物理引擎移动
+circle.physicsBody!.isDynamic = false
 
 // 9.7 矩形实体
 square.physicsBody = SKPhysicsBody(rectangleOf: square.frame.size)
@@ -129,4 +132,10 @@ extension SKScene {
 // 3 两个定时器，第一个每秒触发20次，第二个3秒触发一次。
 Timer.scheduledTimer(timeInterval: 0.05, target: scene, selector: #selector(SKScene.windWithTimer), userInfo: nil, repeats: true)
 Timer.scheduledTimer(timeInterval: 3.0, target: scene, selector: #selector(SKScene.switchWindDirection), userInfo: nil, repeats: true)
+
+// 挑战2：体感实体
+let circleAction = SKAction.repeatForever(SKAction.sequence([
+        SKAction.moveTo(x: 50.0, duration: 3.0),
+        SKAction.moveTo(x: 400.0, duration: 3.0)
+    ]))
 
