@@ -29,6 +29,8 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+            // 10.4 添加物理
+            view.showsPhysics = true
         }
     }
 
