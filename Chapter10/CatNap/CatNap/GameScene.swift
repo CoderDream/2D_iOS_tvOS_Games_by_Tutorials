@@ -43,6 +43,8 @@ class GameScene: SKScene {
         
 //        bedNode.setScale(1.5)
 //        catNode.setScale(1.5)
+        // 10.6 背景音乐
+        SKTAudio.sharedInstance().playBackgroundMusic(filename: "backgroundMusic.mp3")
     }
     
     func touchDown(atPoint pos : CGPoint) {
