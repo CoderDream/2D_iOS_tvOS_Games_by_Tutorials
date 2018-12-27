@@ -30,10 +30,10 @@ public extension SKAction {
     return SKAction.sequence([SKAction.wait(forDuration:delay), action])
   }
 
-  /**
-   * Performs a block after the specified delay. TODO
-   */
-//  public class func afterDelay(delay: TimeInterval, runBlock block: SKAction) -> SKAction {
+//  /**
+//   * Performs a block after the specified delay. TODO
+//   */
+//  public class func afterDelay(delay: TimeInterval, runBlock block: @escaping () -> Void) -> SKAction {
 //    return SKAction.afterDelay(delay, performAction: SKAction.run(block))
 //  }
 //
@@ -43,6 +43,20 @@ public extension SKAction {
 //  public class func removeFromParentAfterDelay(delay: TimeInterval) -> SKAction {
 //    return SKAction.afterDelay(delay, performAction: SKAction.removeFromParent())
 //  }
+    
+    /**
+     * Performs a block after the specified delay.
+     */
+    public class func afterDelay(_ delay: TimeInterval, runBlock block: @escaping () -> Void) -> SKAction {
+        return SKAction.afterDelay(delay: delay, performAction: SKAction.run(block))
+    }
+    
+    /**
+     * Removes the node from its parent after the specified delay.
+     */
+    public class func removeFromParentAfterDelay(_ delay: TimeInterval) -> SKAction {
+        return SKAction.afterDelay(delay: delay, performAction: SKAction.removeFromParent())
+    }
 
   /**
    * Creates an action to perform a parabolic jump.

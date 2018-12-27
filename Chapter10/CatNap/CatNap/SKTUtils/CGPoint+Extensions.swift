@@ -42,7 +42,7 @@ public extension CGPoint {
   /**
    * Adds (dx, dy) to the point.
    */
-  public mutating func offset(dx dx: CGFloat, dy: CGFloat) -> CGPoint {
+  public mutating func offset(dx: CGFloat, dy: CGFloat) -> CGPoint {
     x += dx
     y += dy
     return self

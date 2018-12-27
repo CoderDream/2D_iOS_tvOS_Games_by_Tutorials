@@ -37,6 +37,7 @@
 		3F9C7EDF21D51B4A0045AA75 /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C7ED321D51B4A0045AA75 /* SKTEffects.swift */; };
 		3F9C7EE021D51B4A0045AA75 /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C7ED421D51B4A0045AA75 /* SKTTimingFunctions.swift */; };
 		3F9C7EE121D51B4A0045AA75 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C7ED521D51B4A0045AA75 /* Vector3.swift */; };
+		3F9C7EE321D529570045AA75 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C7EE221D529570045AA75 /* readme.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		3F9C7ED321D51B4A0045AA75 /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		3F9C7ED421D51B4A0045AA75 /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		3F9C7ED521D51B4A0045AA75 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		3F9C7EE221D529570045AA75 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				3F9C7ED321D51B4A0045AA75 /* SKTEffects.swift */,
 				3F9C7ED421D51B4A0045AA75 /* SKTTimingFunctions.swift */,
 				3F9C7ED521D51B4A0045AA75 /* Vector3.swift */,
+				3F9C7EE221D529570045AA75 /* readme.md */,
 			);
 			path = SKTUtils;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				3F4F07F421D1BAC800FDF992 /* GameScene.sks in Resources */,
 				3F4F081221D1BD3600FDF992 /* lose.mp3 in Resources */,
 				3F4F07FF21D1BAD000FDF992 /* Assets.xcassets in Resources */,
+				3F9C7EE321D529570045AA75 /* readme.md in Resources */,
 				3F21A12121D3BA4B00B6D802 /* CatWakeUp.sks in Resources */,
 				3F21A11F21D3B93900B6D802 /* CatCurl.sks in Resources */,
 				3F4F081121D1BD3600FDF992 /* win.mp3 in Resources */,

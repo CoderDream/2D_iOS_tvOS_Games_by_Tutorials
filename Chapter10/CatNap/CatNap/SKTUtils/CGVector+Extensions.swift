@@ -42,7 +42,7 @@ public extension CGVector {
   /**
    * Adds (dx, dy) to the vector.
    */
-  public mutating func offset(dx dx: CGFloat, dy: CGFloat) -> CGVector {
+  public mutating func offset(dx: CGFloat, dy: CGFloat) -> CGVector {
     self.dx += dx
     self.dy += dy
     return self
