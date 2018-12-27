@@ -100,3 +100,33 @@ DispatchAfter(after: 2.0) {
         shake()
     }
 }
+
+// 挑战1：力量
+var blowingRight = true
+var windForce = CGVector(dx: 50, dy: 0)
+
+extension SKScene {
+    // 1 遍历所有的沙子粒子和形状实体，并对每一个粒子和实体都应用当前的windForce
+    @objc func windWithTimer(timer: Timer) {
+        // TODO: apply force to all bodies
+        enumerateChildNodes(withName: "sand") {
+            node, _ in
+            node.physicsBody!.applyForce(windForce)
+        }
+        enumerateChildNodes(withName: "shape") {
+            node, _ in
+            node.physicsBody!.applyForce(windForce)
+        }
+    }
+    
+    // 2 直接切换 blowingRight 并更新 windForce
+    @objc func switchWindDirection(timer: Timer) {
+        blowingRight = !blowingRight
+        windForce = CGVector(dx: blowingRight ? 50 : -50, dy: 0)
+    }
+}
+
+// 3 两个定时器，第一个每秒触发20次，第二个3秒触发一次。
+Timer.scheduledTimer(timeInterval: 0.05, target: scene, selector: #selector(SKScene.windWithTimer), userInfo: nil, repeats: true)
+Timer.scheduledTimer(timeInterval: 3.0, target: scene, selector: #selector(SKScene.switchWindDirection), userInfo: nil, repeats: true)
+
