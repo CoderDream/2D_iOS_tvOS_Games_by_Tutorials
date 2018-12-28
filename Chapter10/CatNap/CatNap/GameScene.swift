@@ -13,7 +13,20 @@ protocol CustomNodeEvents {
     func didMoveToScene()
 }
 
-class GameScene: SKScene {
+protocol InteractiveNode {
+    func interact()
+}
+
+struct PhysicsCategory {
+    static let None:    UInt32 = 0
+    static let Cat:     UInt32 = 0b1    // 1
+    static let Block:   UInt32 = 0b10   // 2
+    static let Bed:     UInt32 = 0b100  // 4
+    static let Edge:    UInt32 = 0b1000 // 8
+}
+
+// 10.7.3 检测实体之间的碰撞
+class GameScene: SKScene, SKPhysicsContactDelegate {
     // 10.3 将精灵连接到变量
     var bedNode : BedNode!
     var catNode : CatNode!
@@ -27,6 +40,10 @@ class GameScene: SKScene {
         
         let playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: size.height - maxAspectRatioHeight * 2)
         physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
+        
+        // 10.7.3 检测实体之间的碰撞
+        physicsWorld.contactDelegate = self
+        physicsBody!.categoryBitMask = PhysicsCategory.Edge
         
         // 10.2 定制节点类
         enumerateChildNodes(withName: "//*", using: {
@@ -47,32 +64,13 @@ class GameScene: SKScene {
         SKTAudio.sharedInstance().playBackgroundMusic(filename: "backgroundMusic.mp3")
     }
     
-    func touchDown(atPoint pos : CGPoint) {
-
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
+    func didBegin(_ contact: SKPhysicsContact) {
+        let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        if collision == PhysicsCategory.Cat | PhysicsCategory.Bed {
+            print("SUCCESS")
+        } else if collision == PhysicsCategory.Cat | PhysicsCategory.Edge {
+            print("FAIL")
+        }
     }
 }

@@ -38,6 +38,7 @@
 		3F9C7EE021D51B4A0045AA75 /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C7ED421D51B4A0045AA75 /* SKTTimingFunctions.swift */; };
 		3F9C7EE121D51B4A0045AA75 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C7ED521D51B4A0045AA75 /* Vector3.swift */; };
 		3F9C7EE321D529570045AA75 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C7EE221D529570045AA75 /* readme.md */; };
+		3FF265C021D657C4008DDB0A /* BlockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF265BF21D657C4008DDB0A /* BlockNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		3F9C7ED421D51B4A0045AA75 /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		3F9C7ED521D51B4A0045AA75 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		3F9C7EE221D529570045AA75 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		3FF265BF21D657C4008DDB0A /* BlockNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				3F4F07F121D1BAC700FDF992 /* AppDelegate.swift */,
 				3F4F07F521D1BAC800FDF992 /* Actions.sks */,
 				3F4F07F721D1BAC800FDF992 /* GameScene.swift */,
+				3FF265BF21D657C4008DDB0A /* BlockNode.swift */,
 				3F4F07F921D1BAC800FDF992 /* GameViewController.swift */,
 				3F4F07FB21D1BAC800FDF992 /* Main.storyboard */,
 				3F4F07FE21D1BAD000FDF992 /* Assets.xcassets */,
@@ -257,6 +260,7 @@
 				3F9C7EE021D51B4A0045AA75 /* SKTTimingFunctions.swift in Sources */,
 				3F9C7EDB21D51B4A0045AA75 /* SKAction+SpecialEffects.swift in Sources */,
 				3F9C7ED921D51B4A0045AA75 /* Int+Extensions.swift in Sources */,
+				3FF265C021D657C4008DDB0A /* BlockNode.swift in Sources */,
 				3F9C7EE121D51B4A0045AA75 /* Vector3.swift in Sources */,
 				3F9C7EC621D50C830045AA75 /* BedNode.swift in Sources */,
 				3F9C7EDC21D51B4A0045AA75 /* SKColor+Extensions.swift in Sources */,
