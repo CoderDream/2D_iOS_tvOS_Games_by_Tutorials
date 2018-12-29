@@ -10,6 +10,7 @@
 		3F216E9221D2663000691BF9 /* Cat.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F216E9121D2663000691BF9 /* Cat.sks */; };
 		3F21A11F21D3B93900B6D802 /* CatCurl.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F21A11E21D3B93900B6D802 /* CatCurl.sks */; };
 		3F21A12121D3BA4B00B6D802 /* CatWakeUp.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F21A12021D3BA4B00B6D802 /* CatWakeUp.sks */; };
+		3F4BF5DB21D7156E002886EF /* MessageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BF5DA21D7156E002886EF /* MessageNode.swift */; };
 		3F4F07F221D1BAC700FDF992 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F07F121D1BAC700FDF992 /* AppDelegate.swift */; };
 		3F4F07F421D1BAC800FDF992 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F4F07F321D1BAC800FDF992 /* GameScene.sks */; };
 		3F4F07F621D1BAC800FDF992 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F4F07F521D1BAC800FDF992 /* Actions.sks */; };
@@ -45,6 +46,7 @@
 		3F216E9121D2663000691BF9 /* Cat.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Cat.sks; sourceTree = "<group>"; };
 		3F21A11E21D3B93900B6D802 /* CatCurl.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CatCurl.sks; sourceTree = "<group>"; };
 		3F21A12021D3BA4B00B6D802 /* CatWakeUp.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CatWakeUp.sks; sourceTree = "<group>"; };
+		3F4BF5DA21D7156E002886EF /* MessageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageNode.swift; sourceTree = "<group>"; };
 		3F4F07EE21D1BAC700FDF992 /* CatNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F4F07F121D1BAC700FDF992 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F4F07F321D1BAC800FDF992 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				3F4F080321D1BAD000FDF992 /* Info.plist */,
 				3F9C7EC521D50C830045AA75 /* BedNode.swift */,
 				3F9C7EC721D511F10045AA75 /* CatNode.swift */,
+				3F4BF5DA21D7156E002886EF /* MessageNode.swift */,
 			);
 			path = CatNap;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F9C7ED721D51B4A0045AA75 /* CGPoint+Extensions.swift in Sources */,
+				3F4BF5DB21D7156E002886EF /* MessageNode.swift in Sources */,
 				3F9C7EDF21D51B4A0045AA75 /* SKTEffects.swift in Sources */,
 				3F9C7EDA21D51B4A0045AA75 /* SKAction+Extensions.swift in Sources */,
 				3F4F07F821D1BAC800FDF992 /* GameScene.swift in Sources */,
