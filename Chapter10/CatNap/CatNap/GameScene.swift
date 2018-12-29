@@ -57,10 +57,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         
         // 10.3 将精灵连接到变量
+        //Could not cast value of type 'SKSpriteNode' (0x23ab88660) to 'CatNap.BedNode' (0x10101f1c8).
+        //2018-12-29 14:57:18.598642+0800 CatNap[21462:2364977] Could not cast value of type 'SKSpriteNode' (0x23ab88660) to 'CatNap.BedNode' (0x10101f1c8).
         // Treating a forced downcast to 'BedNode' as optional will never produce 'nil'
         bedNode = childNode(withName: "bed") as? BedNode
         catNode = childNode(withName: "//cat_body") as? CatNode
-        
+        print("bedNode & catNode")
+        print(bedNode)
+        print(catNode)
+        print("Done")
 //        bedNode.setScale(1.5)
 //        catNode.setScale(1.5)
         // 10.6 背景音乐
@@ -74,6 +79,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        print("1   Cat: \(PhysicsCategory.Cat)")
+        print("2   Bed: \(PhysicsCategory.Bed )")
+        print("3  Edge: \(PhysicsCategory.Edge)")
+        print("4 bodyA: \(contact.bodyA.categoryBitMask)")
+        print("5 bodyB: \(contact.bodyB.categoryBitMask)")
+        print("6      : \(collision)")
         
         if collision == PhysicsCategory.Cat | PhysicsCategory.Bed {
             print("SUCCESS")

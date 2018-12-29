@@ -17,6 +17,7 @@ class BedNode : SKSpriteNode, CustomNodeEvents {
         physicsBody!.isDynamic = false
         // 10.7 控制实体
         physicsBody!.categoryBitMask = PhysicsCategory.Bed
+        // 设置为None，不想让床和任何其他的游戏对象碰撞
         physicsBody!.collisionBitMask = PhysicsCategory.None
     }
 }
