@@ -41,4 +41,35 @@ class CatNode : SKSpriteNode, CustomNodeEvents {
         catAwake?.move(toParent: self)
         catAwake?.position = CGPoint(x: -30, y: 100)
     }
+    
+    // 10.8.4 获胜场景
+    func curlAt(scenePoint : CGPoint) {
+        parent!.physicsBody = nil
+        
+        // 1 遍历小猫所有的子节点，即小猫的各个”部分“，并且将其从小猫的身体中删除
+        for child in children {
+            child.removeFromParent()
+        }
+        // 材质设置为nil
+        texture = nil
+        // 背景为透明色
+        color = SKColor.clear
+        
+        // 2 加载 CatWakeUp.sks 并且传递名为 cat_awake 的场景子节点
+        let catAwake = SKSpriteNode(fileNamed: "CatCurl")!.childNode(withName: "cat_curl")
+        
+        // 3 修改 CatWakeUp.sks 场景中精灵的修改父节点为 CatNode，并且设置节点的位置
+        catAwake?.move(toParent: self)
+        catAwake?.position = CGPoint(x: -30, y: 100)
+        
+        var localPoint = parent!.convert(scenePoint, from: scene!)
+        // 蜷缩点加上小猫的高度的1/3，这个点恰好在床的底部
+        localPoint.y += frame.size.height / 3
+        
+        // 给小猫添加动画
+        run(SKAction.group([
+                SKAction.move(to: localPoint, duration: 0.66),
+                SKAction.rotate(toAngle: 0, duration: 0.5)
+            ]))
+    }
 }

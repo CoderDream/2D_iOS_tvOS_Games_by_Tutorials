@@ -77,6 +77,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if collision == PhysicsCategory.Cat | PhysicsCategory.Bed {
             print("SUCCESS")
+            // 10.8.4 获胜场景
+            win()
         } else if collision == PhysicsCategory.Cat | PhysicsCategory.Edge {
             print("FAIL")
             // 10.8.2 失败场景
@@ -115,5 +117,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 10.8.3 播放动画，叫醒小猫
         catNode.wakeUp()
+    }
+    
+    // 游戏获胜
+    func win() {
+        playable = false
+        SKTAudio.sharedInstance().pauseBackgroundMusic()
+        run(SKAction.playSoundFileNamed("win.mp3", waitForCompletion: false))
+        
+        inGameMessage(text: "Nice job!")
+        
+        perform(#selector(newGame), with: nil, afterDelay: 3)
+        
+        // 10.8.4 获胜场景
+        // 小猫蜷缩休息
+        catNode.curlAt(scenePoint: bedNode.position)
     }
 }
