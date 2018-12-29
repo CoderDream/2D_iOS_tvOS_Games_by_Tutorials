@@ -112,5 +112,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 3 等候5秒，重新开始游戏
         perform(#selector(newGame), with: nil, afterDelay: 5)
+        
+        // 10.8.3 播放动画，叫醒小猫
+        catNode.wakeUp()
     }
 }
