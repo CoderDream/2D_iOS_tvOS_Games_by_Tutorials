@@ -72,7 +72,7 @@ class CatNode : SKSpriteNode, CustomNodeEvents {
         // 给小猫添加动画
         run(SKAction.group([
                 SKAction.move(to: localPoint, duration: 0.66),
-                SKAction.rotate(toAngle: 0, duration: 0.5)
+                SKAction.rotate(toAngle: -parent!.zRotation, duration: 0.5)
             ]))
     }
 }

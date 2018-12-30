@@ -121,7 +121,7 @@
 		3F4F07F021D1BAC700FDF992 /* CatNap */ = {
 			isa = PBXGroup;
 			children = (
-				3FFA218921D7B8F200BB4171 /* Nodes */,
+				3FE8B16C21D91566008B6841 /* Nodes */,
 				3F9C7EC921D51B4A0045AA75 /* SKTUtils */,
 				3F216E8E21D2635800691BF9 /* Scenes */,
 				3F4F080921D1BD3600FDF992 /* Sounds */,
@@ -169,7 +169,7 @@
 			path = SKTUtils;
 			sourceTree = "<group>";
 		};
-		3FFA218921D7B8F200BB4171 /* Nodes */ = {
+		3FE8B16C21D91566008B6841 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
 				3F9C7EC521D50C830045AA75 /* BedNode.swift */,
@@ -177,7 +177,7 @@
 				3F4BF5DA21D7156E002886EF /* MessageNode.swift */,
 				3FF265BF21D657C4008DDB0A /* BlockNode.swift */,
 			);
-			path = Nodes;
+			name = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

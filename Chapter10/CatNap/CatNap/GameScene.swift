@@ -41,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let maxAspectRatioHeight = size.width / maxAspectRatio
         let playableMargin : CGFloat = (size.height - maxAspectRatioHeight) / 2
         
-        let playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: size.height - maxAspectRatioHeight * 2)
+        let playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: size.height - playableMargin * 2)
         physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
         
         // 10.7.3 检测实体之间的碰撞
@@ -73,19 +73,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        // 挑战1：统计弹跳次数
+        let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        if collision == PhysicsCategory.Label | PhysicsCategory.Edge {
+            let labelNode = (contact.bodyA.categoryBitMask == PhysicsCategory.Label) ? contact.bodyA.node : contact.bodyB.node
+            
+            if let message = labelNode as? MessageNode {
+                message.didBounce()
+            }
+        }
+        
         // 防止多次成功地接触
         if !playable {
             return
         }
         
-        let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        // let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
-        print("1   Cat: \(PhysicsCategory.Cat)")
-        print("2   Bed: \(PhysicsCategory.Bed )")
-        print("3  Edge: \(PhysicsCategory.Edge)")
-        print("4 bodyA: \(contact.bodyA.categoryBitMask)")
-        print("5 bodyB: \(contact.bodyB.categoryBitMask)")
-        print("6      : \(collision)")
+//        print("1   Cat: \(PhysicsCategory.Cat)")
+//        print("2   Bed: \(PhysicsCategory.Bed )")
+//        print("3  Edge: \(PhysicsCategory.Edge)")
+//        print("4 bodyA: \(contact.bodyA.categoryBitMask)")
+//        print("5 bodyB: \(contact.bodyB.categoryBitMask)")
+//        print("6      : \(collision)")
         
         if collision == PhysicsCategory.Cat | PhysicsCategory.Bed {
             print("SUCCESS")

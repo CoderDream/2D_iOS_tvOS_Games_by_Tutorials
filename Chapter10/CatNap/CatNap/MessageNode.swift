@@ -29,4 +29,17 @@ class MessageNode : SKLabelNode {
         physicsBody!.categoryBitMask = PhysicsCategory.Label
         physicsBody!.restitution = 0.7
     }
+    
+    
+    // 挑战1：统计弹跳次数
+    // 记录弹跳的次数
+    private var bounceCount = 0
+    
+    // 增加计数器，在第4次弹跳的时候从父节点中删除该节点
+    func didBounce() {
+        bounceCount += 1
+        if bounceCount >= 4 {
+            removeFromParent()
+        }
+    }
 }
