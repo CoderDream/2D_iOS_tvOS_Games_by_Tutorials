@@ -59,11 +59,11 @@ class CatNode : SKSpriteNode, CustomNodeEvents {
         color = SKColor.clear
         
         // 2 加载 CatWakeUp.sks 并且传递名为 cat_awake 的场景子节点
-        let catAwake = SKSpriteNode(fileNamed: "CatCurl")!.childNode(withName: "cat_curl")
+        let catCurl = SKSpriteNode(fileNamed: "CatCurl")!.childNode(withName: "cat_curl")
         
         // 3 修改 CatWakeUp.sks 场景中精灵的修改父节点为 CatNode，并且设置节点的位置
-        catAwake?.move(toParent: self)
-        catAwake?.position = CGPoint(x: -30, y: 100)
+        catCurl?.move(toParent: self)
+        catCurl?.position = CGPoint(x: -30, y: 100)
         
         var localPoint = parent!.convert(scenePoint, from: scene!)
         // 蜷缩点加上小猫的高度的1/3，这个点恰好在床的底部
