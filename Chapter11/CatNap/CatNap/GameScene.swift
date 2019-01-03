@@ -33,6 +33,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var catNode : CatNode!
     // 10.8.2 失败场景
     var playable = true
+    // 11.3 加载关卡
+    // 1
+    var currentLevel : Int = 0
+    
+    // 2
+    class func level(levelNum : Int) -> GameScene? {
+        let scene = GameScene(fileNamed: "Level\(levelNum)")!
+        scene.currentLevel  = levelNum
+        scene.scaleMode = .aspectFill
+        return scene
+    }
     
     override func didMove(to view: SKView) {
         // 10.1 开始
@@ -118,11 +129,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // 重新启动当前关卡
     @objc func newGame() {
-        let scene = GameScene(fileNamed: "GameScene")
-        // 场景的缩放模式不变
-        scene!.scaleMode = scaleMode
-        // 删除当前的场景并传入新场景
-        view!.presentScene(scene)
+//        let scene = GameScene(fileNamed: "GameScene")
+//        // 场景的缩放模式不变
+//        scene!.scaleMode = scaleMode
+//        // 删除当前的场景并传入新场景
+//        view!.presentScene(scene)
+        view!.presentScene(GameScene.level(levelNum: currentLevel))
     }
     
     // 游戏失败
