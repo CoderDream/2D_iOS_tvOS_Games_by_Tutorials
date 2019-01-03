@@ -156,4 +156,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 小猫蜷缩休息
         catNode.curlAt(scenePoint: bedNode.position)
     }
+    
+    override func didSimulatePhysics() {
+        if playable {
+            // 检测小猫是否向某一边倾斜超过了25度
+            print(abs(catNode.parent!.zRotation))
+            if abs(catNode.parent!.zRotation) > CGFloat(25).degreesToRadians() {
+                lose()
+            }
+        }
+    }
 }
