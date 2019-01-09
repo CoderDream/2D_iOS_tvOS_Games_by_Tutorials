@@ -129,4 +129,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     catNode.curlAt(scenePoint: bedNode.position)
   }
+    
+//    override func didSimulatePhysics() {
+//        if playable {
+//            if abs(catNode.parent!.zRotation) > CGFloat(25).degreesToRadians() {
+//                lose()                
+//            }
+//        }
+//    }
 }
